@@ -1,10 +1,74 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <title>test</title>
-</head>
-<body>
-  <h1>Hello room404</h1>
-</body>
-</html>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>株式会社room404</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,"Helvetica Neue",Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}body{background:#000;color:#fff;overflow-x:hidden;scroll-behavior:smooth}#pptSplash{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:#000}#pptSplash img{width:100%;height:100%;object-fit:contain;background:#000}.scrollGuide{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.65;letter-spacing:.18em;user-select:none;animation:blink 1.5s infinite}@keyframes blink{0%{opacity:.15}50%{opacity:.85}100%{opacity:.15}}.section{min-height:100vh;padding:120px 10%;background:#0a0a0a}.nav{position:fixed;top:0;left:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);z-index:100}.nav a{color:#fff;margin-left:26px;text-decoration:none;font-weight:650;cursor:pointer;display:inline-flex;gap:.35em;align-items:center}.nav a:hover{opacity:.65}h1{font-size:46px;margin-bottom:34px;line-height:1.1}.small{font-size:12px;opacity:.78;line-height:1.7}/* 404 overlay */.fake404{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:0;pointer-events:none;z-index:999;text-align:center;padding:24px;user-select:none;transition:opacity .12s ease}.fake404.active{opacity:1;pointer-events:auto}/* global fx */body.globalGarbled{animation:globalFlicker 1.6s ease-in-out}@keyframes globalFlicker{0%{filter:none}15%{filter:contrast(1.35)saturate(1.15)blur(.4px)}35%{filter:contrast(1.55)saturate(1.25)blur(.8px)}55%{filter:contrast(1.15)saturate(.95)blur(.2px)}100%{filter:none}}body.globalGarbled::before{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 4px),radial-gradient(900px 420px at 70% 10%,rgba(20,99,255,.12),transparent 60%),radial-gradient(900px 420px at 30% 80%,rgba(255,92,122,.10),transparent 60%);mix-blend-mode:screen;opacity:.65}/* modal */.modalBack{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .16s ease;z-index:500}.modalBack.on{opacity:1;pointer-events:auto}.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(760px,92vw);background:rgba(12,12,12,.92);border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);padding:18px;opacity:0;pointer-events:none;transition:opacity .16s ease,transform .16s ease;z-index:501}.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}.modal .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modal .hd .t{font-weight:800;letter-spacing:.08em}.modal .x{border:none;background:transparent;color:#fff;font-size:20px;cursor:pointer;opacity:.7}.modal .x:hover{opacity:1}.card{max-width:720px;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}.ip{width:100%;padding:14px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:#fff;font-size:18px;outline:none}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn{padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer}.btn:hover{opacity:.85}.btn.p{background:rgba(20,99,255,.25)}[data-crypt]{white-space:pre-wrap}</style></head><body>
+
+<section id="pptSplash"><img id="splashImg" alt="room404 案内"><div class="scrollGuide">SCROLL</div></section>
+
+<div class="nav"><div><span data-crypt>room404</span></div><div>
+  <a onclick="x404()"><span data-crypt>企業理念</span></a>
+  <a onclick="x404()"><span data-crypt>事業内容</span></a>
+  <a onclick="x404()"><span data-crypt>採用情報</span></a>
+  <a onclick="goEntry()"><span data-crypt>お問い合わせ</span></a>
+</div></div>
+
+<section class="section" id="officialTop"><h1 data-crypt>株式会社room404</h1><p data-crypt>現在一部ページで不具合が発生しています。スクロールして進めてください。</p><p class="small" data-crypt style="margin-top:14px;max-width:820px">※このページは内定者向け企画の演出用サイトです。</p></section>
+
+<section class="section" id="checkinSection" style="background:#050505"><h1 data-crypt style="font-size:40px;margin-bottom:18px">効果測定（任意）</h1><p class="small" data-crypt style="margin-bottom:18px;max-width:820px">入力は匿名想定。未入力でもOK。送信後、サイト全体が復旧（＝文字化け）します。</p><div class="card"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:10px">ROOM404://CHECKIN</div><div style="display:grid;gap:12px">
+  <div><div class="small" data-crypt style="margin-bottom:6px">いまの準備状況（1つ）</div><select id="q_ready" class="ip" style="font-size:16px"><option data-crypt value="" selected>選択してください</option><option data-crypt>順調</option><option data-crypt>ぼちぼち</option><option data-crypt>これから</option><option data-crypt>よくわからない</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">今いちばん気になること（任意）</div><select id="q_worry" class="ip" style="font-size:16px"><option data-crypt value="" selected>選択してください</option><option data-crypt>実務スキル</option><option data-crypt>仕事の進め方</option><option data-crypt>スタンス・マナー</option><option data-crypt>生活・環境</option><option data-crypt>その他</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">ひとこと（任意）</div><textarea id="q_free" class="ip" placeholder="自由記述（任意）" style="min-height:110px;resize:vertical;font-size:16px"></textarea></div>
+</div><div class="btns"><button class="btn p" onclick="submit()">送信して復旧する</button><button class="btn" onclick="skip()">入力せず復旧する</button></div><div id="checkinMsg" class="small" data-crypt style="margin-top:10px"></div></div></section>
+
+<div class="fake404" id="fake404"><span data-crypt>404 Not Found...</span></div>
+
+<div class="modalBack" id="mb" aria-hidden="true"></div>
+<div class="modal" id="m" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="hd"><div class="t" id="mt" data-crypt>お問い合わせ</div><button class="x" aria-label="close" onclick="closeEntry()">✕</button></div><div class="small" data-crypt style="margin:2px 0 12px">現在フォームが壊れています。代わりに <b>入室コード</b> を入力して進んでください（未入力でもOK）。</div><div class="card"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:8px">ROOM404://ENTRY</div><input id="entryCode" class="ip" placeholder="例）room404 / kento2026" autocomplete="off"><div class="btns"><button class="btn p" onclick="confirmEntry()">入室して進む</button><button class="btn" onclick="skipEntry()">入力せず進む</button></div><div id="entryMsg" class="small" data-crypt style="margin-top:10px"></div></div></div>
+
+<script>(function(){'use strict';
+  var POOL='01/|_-=+*#@$%!?<>[]{}';
+  var ORIG=new WeakMap();
+  function nodes(){return Array.prototype.slice.call(document.querySelectorAll('[data-crypt]'));}
+  function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c==='\n'||c===' ')o+=c;else o+=(Math.random()<k?c:POOL[(Math.random()*POOL.length)|0]);}return o;}
+  function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
+  function lightCrypt(){nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.7);});}
+  function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
+
+  // ---- splash image (embedded) ----
+  document.getElementById('splashImg').src='hero.jpg';
+
+  // ---- 404 overlay (duration 900ms = 3/4) ----
+  window.x404=function(msg){msg=msg||'404 Not Found...';var f=document.getElementById('fake404');var span=f.querySelector('[data-crypt]')||f;f.classList.add('active');var stop=startGarbled(span,msg);setTimeout(function(){stop();f.classList.remove('active');},900);};
+
+  // ---- modal (お問い合わせ: no page move) ----
+  var mb=document.getElementById('mb'), m=document.getElementById('m');
+  function openEntry(){mb.classList.add('on');m.classList.add('on');mb.setAttribute('aria-hidden','false');setTimeout(function(){document.getElementById('entryCode').focus();},0);window.x404('404 Not Found... (opening)');}
+  window.goEntry=openEntry;
+  window.closeEntry=function(){mb.classList.remove('on');m.classList.remove('on');mb.setAttribute('aria-hidden','true');document.getElementById('entryMsg').textContent='';};
+  mb.addEventListener('click',function(){window.closeEntry();});
+
+  function toCheckin(){window.closeEntry();setTimeout(function(){document.getElementById('checkinSection').scrollIntoView({behavior:'smooth',block:'start'});},120);}
+  window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
+  window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
+
+  // ---- global mojibake (text only) ----
+  function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
+
+  window.submit=function(){document.getElementById('checkinMsg').textContent='OK: 記録しました。復旧処理を開始します…';window.x404();var total=globalMojibake(2);
+    try{var payload={t:Date.now(),ready:(document.getElementById('q_ready').value||null),worry:(document.getElementById('q_worry').value||null),freeLen:(document.getElementById('q_free').value||'').length};var key='room404_checkin_v4';var arr=JSON.parse(localStorage.getItem(key)||'[]');arr.push(payload);localStorage.setItem(key,JSON.stringify(arr));}catch(e){}
+    setTimeout(function(){document.getElementById('officialTop').scrollIntoView({behavior:'smooth',block:'start'});},520+total+200);
+  };
+  window.skip=function(){document.getElementById('checkinMsg').textContent='OK: 記録しました（未入力）。復旧処理を開始します…';window.x404();var total=globalMojibake(2);
+    setTimeout(function(){document.getElementById('officialTop').scrollIntoView({behavior:'smooth',block:'start'});},520+total+200);
+  };
+
+  // Enter key (entry modal)
+  document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var a=document.activeElement;if(a&&a.id==='entryCode'){e.preventDefault();window.confirmEntry();}});
+
+  // initial light crypt (30%)
+  setTimeout(lightCrypt,200);
+
+  // ---- tests ----
+  function assert(c,m){if(!c){console.error('[room404 test] FAIL:',m);throw new Error('Test failed: '+m);}console.log('[room404 test] OK:',m);}
+  function runTests(){assert(typeof window.x404==='function','x404 exists');assert(typeof window.goEntry==='function','goEntry exists');assert(typeof window.submit==='function','submit exists');window.goEntry();assert(m.classList.contains('on'),'modal opens');window.closeEntry();assert(!m.classList.contains('on'),'modal closes');var s='A\nB',o=keepStr(s,.2);assert((s.match(/\n/g)||[]).length===(o.match(/\n/g)||[]).length,'keepStr preserves newlines');console.log('[room404 test] All tests passed');}
+  try{var p=new URLSearchParams(location.search);if(p.get('test')==='1')runTests();}catch(e){}
+})();</script>
+
+</body></html>
