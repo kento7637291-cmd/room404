@@ -32,7 +32,7 @@
   function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
   // ---- splash image (embedded) ----
-  document.getElementById('splashImg').src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4RmrRXhpZgAATU0AKgAAAA...';
+  document.getElementById('splashImg').src='hero.jpg';
 
   // ---- 404 overlay (duration 900ms = 3/4) ----
   window.x404=function(msg){msg=msg||'404 Not Found...';var f=document.getElementById('fake404');var span=f.querySelector('[data-crypt]')||f;f.classList.add('active');var stop=startGarbled(span,msg);setTimeout(function(){stop();f.classList.remove('active');},900);};
