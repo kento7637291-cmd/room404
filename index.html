@@ -4,6 +4,12 @@
 #revealOverlay.on{opacity:1;pointer-events:auto;}
 #revealOverlay .bg{position:absolute;inset:0;background:url('haku.jpeg') center/cover no-repeat;opacity:.55;}
 #revealOverlay .txt{position:relative;z-index:1;max-width:700px;padding:40px;text-align:center;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);}</style></head><body>
+#rewardBox{margin-top:32px;display:none;text-align:center;}
+#rewardBox input{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;}
+#rewardBox .rMsg{font-size:12px;opacity:.7;margin-top:8px;min-height:18px;}
+#finalMsg{position:fixed;inset:0;z-index:700;display:flex;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;transition:opacity 3s ease;padding:40px;}
+#finalMsg.on{opacity:1;pointer-events:auto;}
+#finalMsg .inner{max-width:660px;font-size:17px;line-height:2.1;text-align:center;letter-spacing:.05em;white-space:pre-wrap;}
 
 <section id="pptSplash"><img id="splashImg" alt="room404 案内"><div class="scrollGuide">SCROLL</div></section>
 
@@ -139,6 +145,7 @@ window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK:
   // ---- global mojibake (text only) ----
   function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
 
+var rewardStep=0;
 function showReveal(){
   window.closeEntry();
   var ov=document.getElementById('revealOverlay');
@@ -150,10 +157,46 @@ function showReveal(){
     var id=setInterval(function(){
       keep=Math.min(1.0,keep+0.07);
       txt.textContent=keepStr(base,1-keep);
-      if(keep>=1.0){clearInterval(id);txt.textContent=keepStr(base,0);}
+      if(keep>=1.0){
+        clearInterval(id);
+        txt.textContent=keepStr(base,0);
+        document.getElementById('rewardBox').style.display='block';
+      }
     },65);
   },3000);
 }
+window.checkReward=function(){
+  var val=(document.getElementById('rewardInput').value||'').trim();
+  var msg=document.getElementById('rewardMsg');
+  if(rewardStep===0){
+    if(val==='前半'){
+      rewardStep=1;
+      document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
+      document.getElementById('rewardInput').value='';
+      msg.textContent='OK: 前半コード認証';
+    } else {
+      msg.textContent='NG: コードが違います';
+      window.x404();
+    }
+  } else if(rewardStep===1){
+    if(val==='後半'){
+      msg.textContent='OK: 認証完了。遷移します…';
+      window.x404();
+      setTimeout(function(){
+        window.open('https://www.shiftinc.jp/company/philosophy/','_blank');
+        setTimeout(function(){
+          document.getElementById('revealOverlay').classList.remove('on');
+          var fin=document.getElementById('finalMsg');
+          fin.classList.add('on');
+        },1500);
+      },900);
+    } else {
+      msg.textContent='NG: コードが違います';
+      window.x404();
+    }
+  }
+};
+
 
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
@@ -193,7 +236,24 @@ window.skipCheckin=function(){
 <div id="revealOverlay">
   <div class="bg"></div>
   <div class="txt" id="revealTxt">この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>しかし、本来は研修用の簡易システムだったものが<br>想定外のエラー(404)により暴走<br><br>システムから送られてきた謎の内定通知書を手に会場に来た参加者は<br>"研修用のデータに実体ごと取り込まれた存在となってしまった"</div>
+  <div id="rewardBox">
+    <div id="rewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;">報酬コード（1つめ）を入力</div>
+    <input id="rewardInput" type="text" placeholder="コードを入力" autocomplete="off">
+    <div class="btn p" onclick="checkReward()" style="display:inline-block;margin-top:10px;cursor:pointer;">決定</div>
+    <div class="rMsg" id="rewardMsg"></div>
+  </div>
 </div>
+<div id="finalMsg">
+  <div class="inner">この仮想世界は
+「SHIFTで働く上で必要な"スキル"をデータとして可視化した世界」
+株式会社room404からSHIFTのクレドに行き着くことで、現実世界に帰ることができたようだ。
+「この世界から脱出したあなたたちは、すでに"新人社員としての第一歩"を踏み出している」
+気づくと現実の世界。
+謎の内定通知書も、謎の会社も人物もどうやらエラーによって引き起ったものだった。
+株式会社room404の存在は消えてしまったようだ。
+手元には、謎の内定通知書だけが残っている</div>
+</div>
+
 <form id="gf-form" method="POST" target="gf-sender"
   action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
   style="display:none">
