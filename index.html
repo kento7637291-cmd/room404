@@ -144,9 +144,17 @@ function showReveal(){
   var ov=document.getElementById('revealOverlay');
   ov.classList.add('on');
   setTimeout(function(){
-    globalMojibake(2);
+    var txt=document.getElementById('revealTxt');
+    var base=txt.textContent;
+    var keep=0.0;
+    var id=setInterval(function(){
+      keep=Math.min(1.0,keep+0.07);
+      txt.textContent=keepStr(base,1-keep);
+      if(keep>=1.0){clearInterval(id);txt.textContent=keepStr(base,0);}
+    },65);
   },3000);
 }
+
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
   window.x404();
