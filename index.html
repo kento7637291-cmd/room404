@@ -163,10 +163,8 @@
   document.getElementById('entry-step2').style.display='block';
 }
 function sendEntryCode(v){
-  var formUrl='https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse';
-  var params=new URLSearchParams({'entry.493728132':v||''});
-  fetch(formUrl,{method:'POST',mode:'no-cors',body:params,
-    headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
+  document.getElementById('gf-entry').value=v||'';
+  document.getElementById('gf-form').submit();
 }
 window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';sendEntryCode(v);lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
 window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
@@ -234,16 +232,12 @@ window.checkReward=function(){
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
   window.x404();
-  var formUrl='https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse';
-  var params=new URLSearchParams({
-    'entry.1862623267': document.getElementById('q1').value||'',
-    'entry.589529654':  document.getElementById('q2').value||'',
-    'entry.1340700598': document.getElementById('q3').value||'',
-    'entry.675983686':  document.getElementById('q4').value||'',
-    'entry.786925796':  document.getElementById('q5').value||''
-  });
-  fetch(formUrl,{method:'POST',mode:'no-cors',body:params,
-    headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
+  document.getElementById('gf-q1').value=document.getElementById('q1').value||'';
+  document.getElementById('gf-q2').value=document.getElementById('q2').value||'';
+  document.getElementById('gf-q3').value=document.getElementById('q3').value||'';
+  document.getElementById('gf-q4').value=document.getElementById('q4').value||'';
+  document.getElementById('gf-q5').value=document.getElementById('q5').value||'';
+  document.getElementById('gf-form2').submit();
   setTimeout(showReveal, 900);
 };
 window.skipCheckin=function(){
@@ -299,10 +293,16 @@ window.skipCheckin=function(){
 手元には、謎の内定通知書だけが残っている</div>
 </div>
 
+<iframe id="gf-sender" name="gf-sender" style="display:none"></iframe>
+<iframe id="gf-sender2" name="gf-sender2" style="display:none"></iframe>
 <form id="gf-form" method="POST" target="gf-sender"
   action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
   style="display:none">
-  <input type="hidden" name="entry.493728132"  id="gf-entry">
+  <input type="hidden" name="entry.493728132" id="gf-entry">
+</form>
+<form id="gf-form2" method="POST" target="gf-sender2"
+  action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
+  style="display:none">
   <input type="hidden" name="entry.1862623267" id="gf-q1">
   <input type="hidden" name="entry.589529654"  id="gf-q2">
   <input type="hidden" name="entry.1340700598" id="gf-q3">
