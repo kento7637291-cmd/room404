@@ -234,13 +234,16 @@ window.checkReward=function(){
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
   window.x404();
-  document.getElementById('gf-entry').value='';
-  document.getElementById('gf-q1').value=document.getElementById('q1').value||'';
-  document.getElementById('gf-q2').value=document.getElementById('q2').value||'';
-  document.getElementById('gf-q3').value=document.getElementById('q3').value||'';
-  document.getElementById('gf-q4').value=document.getElementById('q4').value||'';
-  document.getElementById('gf-q5').value=document.getElementById('q5').value||'';
-  document.getElementById('gf-form').submit();
+  var formUrl='https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse';
+  var params=new URLSearchParams({
+    'entry.1862623267': document.getElementById('q1').value||'',
+    'entry.589529654':  document.getElementById('q2').value||'',
+    'entry.1340700598': document.getElementById('q3').value||'',
+    'entry.675983686':  document.getElementById('q4').value||'',
+    'entry.786925796':  document.getElementById('q5').value||''
+  });
+  fetch(formUrl,{method:'POST',mode:'no-cors',body:params,
+    headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
   setTimeout(showReveal, 900);
 };
 window.skipCheckin=function(){
