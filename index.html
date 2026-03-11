@@ -131,14 +131,11 @@
   document.getElementById('entry-step1').style.display='none';
   document.getElementById('entry-step2').style.display='block';
 }
-  function sendEntryCode(v){
-  document.getElementById('gf-entry').value=v||'';
-  document.getElementById('gf-q1').value='';
-  document.getElementById('gf-q2').value='';
-  document.getElementById('gf-q3').value='';
-  document.getElementById('gf-q4').value='';
-  document.getElementById('gf-q5').value='';
-  document.getElementById('gf-form').submit();
+function sendEntryCode(v){
+  var formUrl='https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse';
+  var params=new URLSearchParams({'entry.493728132':v||''});
+  fetch(formUrl,{method:'POST',mode:'no-cors',body:params,
+    headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
 }
 window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';sendEntryCode(v);lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
 window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
