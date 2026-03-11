@@ -182,7 +182,7 @@ function showReveal(){
   ov.style.opacity='1';
   ov.style.pointerEvents='auto';
   ov.classList.add('glitching');
-  setTimeout(function(){ov.classList.remove('glitching');},900);
+  setTimeout(function(){ov.classList.remove('glitching');},1800);
   setTimeout(function(){
     var txt=document.getElementById('revealTxt');
     var base=txt.textContent;
@@ -196,7 +196,7 @@ function showReveal(){
         document.getElementById('rewardBox').style.display='block';
       }
     },65);
-  },3000);
+  },6000);
 }
 window.checkReward=function(){
   var val=(document.getElementById('rewardInput').value||'').trim();
