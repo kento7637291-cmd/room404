@@ -122,15 +122,15 @@
 <div class="card" id="entry-step2" style="display:none;margin-top:12px"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:10px">ROOM404://CHECKIN</div>
 <div style="display:grid;gap:12px">
   <div><div class="small" data-crypt style="margin-bottom:6px">Q1. 入社に向けての不安度（1〜10）</div>
-  <select id="q1" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option>1（不安はほとんどない）</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10（非常に不安である）</option></select></div>
+  <select id="q1" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
   <div><div class="small" data-crypt style="margin-bottom:6px">Q2. 特に不安な点</div>
-  <select id="q2" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option>同期となじめるか不安（横への不安）</option><option>先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option>業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option>論理的思考やアウトプットができるか不安（内側への不安）</option><option>会社の雰囲気や文化についていけるか不安（外側への不安）</option><option>配属後のキャリアパス</option><option>その他</option></select></div>
+  <select id="q2" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="同期となじめるか不安（横への不安）">同期となじめるか不安（横への不安）</option><option value="先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）">先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option value="業務に必要なスキル・能力が足りているか不安（内側への不安）">業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option value="論理的思考やアウトプットができるか不安（内側への不安）">論理的思考やアウトプットができるか不安（内側への不安）</option><option value="会社の雰囲気や文化についていけるか不安（外側への不安）">会社の雰囲気や文化についていけるか不安（外側への不安）</option><option value="配属後のキャリアパス">配属後のキャリアパス</option><option value="その他">その他</option></select></div>
   <div><div class="small" data-crypt style="margin-bottom:6px">Q3. Q2の項目に対する不安度（1〜10）</div>
-  <select id="q3" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option>1（不安はほとんどない）</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10（非常に不安である）</option></select></div>
+  <select id="q3" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
   <div><div class="small" data-crypt style="margin-bottom:6px">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
-  <select id="q4" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option>可処分時間の不足</option><option>取得の目的が不透明</option><option>何から手をつければいいかわからない</option><option>勉強法</option><option>学びの成果が実感できない</option><option>その他</option></select></div>
+  <select id="q4" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="可処分時間の不足">可処分時間の不足</option><option value="取得の目的が不透明">取得の目的が不透明</option><option value="何から手をつければいいかわからない">何から手をつければいいかわからない</option><option value="勉強法">勉強法</option><option value="学びの成果が実感できない">学びの成果が実感できない</option><option value="その他">その他</option></select></div>
   <div><div class="small" data-crypt style="margin-bottom:6px">Q5. Q4の項目に対する不安度（1〜10）</div>
-  <select id="q5" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option>1（不安はほとんどない）</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10（非常に不安である）</option></select></div>
+  <select id="q5" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
 </div>
 <div class="btns"><button class="btn p" onclick="submitCheckin()">送信して完了</button><button class="btn" onclick="skipCheckin()">入力せず完了</button></div>
 <div id="checkinMsg2" class="small" data-crypt style="margin-top:10px"></div>
@@ -162,10 +162,9 @@
   document.getElementById('entry-step2').style.display='block';
 }
 var GAS_URL='https://script.google.com/macros/s/AKfycbxGw5tZsditjMxEj-9lgT56lWOK2AnkYnnzrnFKT-r6g5nopFwtEjqi22lG1rxIq9_f1w/exec';
+var savedEntryCode='';
 function sendEntryCode(v){
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',
-    body:JSON.stringify({'入室コード':v||''}),
-    headers:{'Content-Type':'application/json'}}).catch(function(){});
+  savedEntryCode=v||'';
 }
 window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';sendEntryCode(v);lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
 window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
@@ -235,6 +234,7 @@ window.submitCheckin=function(){
   window.x404();
 fetch(GAS_URL,{method:'POST',mode:'no-cors',
     body:JSON.stringify({
+      '入室コード': savedEntryCode,
       'Q.1 脱出ゲームの実施前の今、4月の入社に向けてどの程度不安を感じていますか？': parseInt(document.getElementById('q1').value)||1,
       'Q.2 入社にあたって、特にどのような点に不安を感じますか？': document.getElementById('q2').value||'',
       'Q.3\u3000 Q.2で回答した項目に対してどの程度不安を感じていますか？': parseInt(document.getElementById('q3').value)||1,
