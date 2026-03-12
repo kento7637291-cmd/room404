@@ -161,9 +161,11 @@
   document.getElementById('entry-step1').style.display='none';
   document.getElementById('entry-step2').style.display='block';
 }
+var GAS_URL='https://script.google.com/macros/s/AKfycbxGw5tZsditjMxEj-9lgT56lWOK2AnkYnnzrnFKT-r6g5nopFwtEjqi22lG1rxIq9_f1w/exec';
 function sendEntryCode(v){
-  document.getElementById('gf-entry').value=v||'';
-  document.getElementById('gf-form').submit();
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',
+    body:JSON.stringify({'入室コード':v||''}),
+    headers:{'Content-Type':'application/json'}}).catch(function(){});
 }
 window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';sendEntryCode(v);lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
 window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
@@ -231,12 +233,15 @@ window.checkReward=function(){
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
   window.x404();
-  document.getElementById('gf-q1').value=document.getElementById('q1').value||'';
-  document.getElementById('gf-q2').value=document.getElementById('q2').value||'';
-  document.getElementById('gf-q3').value=document.getElementById('q3').value||'';
-  document.getElementById('gf-q4').value=document.getElementById('q4').value||'';
-  document.getElementById('gf-q5').value=document.getElementById('q5').value||'';
-  document.getElementById('gf-form2').submit();
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',
+    body:JSON.stringify({
+      '入社不安度':document.getElementById('q1').value||'',
+      '不安な点':document.getElementById('q2').value||'',
+      '不安度2':document.getElementById('q3').value||'',
+      '基本情報障壁':document.getElementById('q4').value||'',
+      '不安度5':document.getElementById('q5').value||''
+    }),
+    headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(showReveal, 900);
 };
 window.skipCheckin=function(){
