@@ -233,13 +233,13 @@ window.checkReward=function(){
 window.submitCheckin=function(){
   document.getElementById('checkinMsg2').textContent='OK: 記録しました。復旧処理を開始します…';
   window.x404();
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',
+fetch(GAS_URL,{method:'POST',mode:'no-cors',
     body:JSON.stringify({
-      '入社不安度':document.getElementById('q1').value||'',
-      '不安な点':document.getElementById('q2').value||'',
-      '不安度2':document.getElementById('q3').value||'',
-      '基本情報障壁':document.getElementById('q4').value||'',
-      '不安度5':document.getElementById('q5').value||''
+      'Q.1 脱出ゲームの実施前の今、4月の入社に向けてどの程度不安を感じていますか？': parseInt(document.getElementById('q1').value)||1,
+      'Q.2 入社にあたって、特にどのような点に不安を感じますか？': document.getElementById('q2').value||'',
+      'Q.3\u3000 Q.2で回答した項目に対してどの程度不安を感じていますか？': parseInt(document.getElementById('q3').value)||1,
+      'Q.4 基本情報技術者試験やExcelなどの勉強に向けて障壁と感じている要素は何ですか？': document.getElementById('q4').value||'',
+      'Q.5 Q.4で回答した項目に対してどの程度不安を感じていますか？': parseInt(document.getElementById('q5').value)||1
     }),
     headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(showReveal, 900);
