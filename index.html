@@ -119,64 +119,37 @@
 <div class="modal" id="m" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="hd"><div class="t" id="mt" data-crypt>お問い合わせ</div><button class="x" aria-label="close" onclick="closeEntry()">✕</button></div><div class="small" data-crypt style="margin:2px 0 12px">現在フォームが壊れています。代わりに <b>入室コード</b> を入力して進んでください（未入力でもOK）。</div>
   <div class="card" id="entry-step1"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:8px">ROOM404://ENTRY</div><input id="entryCode" class="ip" placeholder="例）room404 / kento2026" autocomplete="off"><div class="btns"><button class="btn p" onclick="confirmEntry()">入室して進む</button><button class="btn" onclick="skipEntry()">入力せず進む</button></div><div id="entryMsg" class="small" data-crypt style="margin-top:10px"></div></div>
 
+**変更前：**
+```html
 <div class="card" id="entry-step2" style="display:none;margin-top:12px"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:10px">ROOM404://CHECKIN</div>
 <div style="display:grid;gap:12px">
-  <div>
-    <div class="small" data-crypt style="margin-bottom:6px">Q1. 入社に向けての不安度（1〜10）</div>
-    <select id="old-q1" class="ip" style="font-size:16px">
-      <option value="" selected>選択してください</option>
-      <option>1（不安はほとんどない）</option>
-      <option>2</option><option>3</option><option>4</option><option>5</option>
-      <option>6</option><option>7</option><option>8</option><option>9</option>
-      <option>10（非常に不安である）</option>
-    </select>
-  </div>
-  <div>
-    <div class="small" data-crypt style="margin-bottom:6px">Q2. 特に不安な点</div>
-    <select id="old-q2" class="ip" style="font-size:16px">
-      <option value="" selected>選択してください</option>
-      <option>同期となじめるか不安（横への不安）</option>
-      <option>先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option>
-      <option>業務に必要なスキル・能力が足りているか不安（内側への不安）</option>
-      <option>論理的思考やアウトプットができるか不安（内側への不安）</option>
-      <option>会社の雰囲気や文化についていけるか不安（外側への不安）</option>
-      <option>配属後のキャリアパス</option>
-      <option>その他</option>
-    </select>
-  </div>
-  <div>
-    <div class="small" data-crypt style="margin-bottom:6px">Q3. Q2の項目に対する不安度（1〜10）</div>
-    <select id="old-q3" class="ip" style="font-size:16px">
-      <option value="" selected>選択してください</option>
-      <option>1（不安はほとんどない）</option>
-      <option>2</option><option>3</option><option>4</option><option>5</option>
-      <option>6</option><option>7</option><option>8</option><option>9</option>
-      <option>10（非常に不安である）</option>
-    </select>
-  </div>
-  <div>
-    <div class="small" data-crypt style="margin-bottom:6px">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
-    <select id="old-q4" class="ip" style="font-size:16px">
-      <option value="" selected>選択してください</option>
-      <option>可処分時間の不足</option>
-      <option>取得の目的が不透明</option>
-      <option>何から手をつければいいかわからない</option>
-      <option>勉強法</option>
-      <option>学びの成果が実感できない</option>
-      <option>その他</option>
-    </select>
-  </div>
-  <div>
-    <div class="small" data-crypt style="margin-bottom:6px">Q5. Q4の項目に対する不安度（1〜10）</div>
-    <select id="old-q5" class="ip" style="font-size:16px">
-      <option value="" selected>選択してください</option>
-      <option>1（不安はほとんどない）</option>
-      <option>2</option><option>3</option><option>4</option><option>5</option>
-      <option>6</option><option>7</option><option>8</option><option>9</option>
-      <option>10（非常に不安である）</option>
-    </select>
-  </div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">Q1. 入社に向けての不安度（1〜10）</div>
+  <select id="q1" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">Q2. 特に不安な点</div>
+  <select id="q2" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="同期となじめるか不安（横への不安）">同期となじめるか不安（横への不安）</option><option value="先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）">先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option value="業務に必要なスキル・能力が足りているか不安（内側への不安）">業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option value="論理的思考やアウトプットができるか不安（内側への不安）">論理的思考やアウトプットができるか不安（内側への不安）</option><option value="会社の雰囲気や文化についていけるか不安（外側への不安）">会社の雰囲気や文化についていけるか不安（外側への不安）</option><option value="配属後のキャリアパス">配属後のキャリアパス</option><option value="その他">その他</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">Q3. Q2の項目に対する不安度（1〜10）</div>
+  <select id="q3" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
+  <select id="q4" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="可処分時間の不足">可処分時間の不足</option><option value="取得の目的が不透明">取得の目的が不透明</option><option value="何から手をつければいいかわからない">何から手をつければいいかわからない</option><option value="勉強法">勉強法</option><option value="学びの成果が実感できない">学びの成果が実感できない</option><option value="その他">その他</option></select></div>
+  <div><div class="small" data-crypt style="margin-bottom:6px">Q5. Q4の項目に対する不安度（1〜10）</div>
+  <select id="q5" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
 </div>
+
+
+<div class="card" id="entry-step2" style="display:none;margin-top:12px"><div class="small" style="letter-spacing:.3px;margin-bottom:10px">ROOM404://CHECKIN</div>
+<div style="display:grid;gap:12px">
+  <div><div class="small" style="margin-bottom:6px">Q1. 入社に向けての不安度（1〜10）</div>
+  <select id="q1" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
+  <div><div class="small" style="margin-bottom:6px">Q2. 特に不安な点</div>
+  <select id="q2" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="同期となじめるか不安（横への不安）">同期となじめるか不安（横への不安）</option><option value="先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）">先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option value="業務に必要なスキル・能力が足りているか不安（内側への不安）">業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option value="論理的思考やアウトプットができるか不安（内側への不安）">論理的思考やアウトプットができるか不安（内側への不安）</option><option value="会社の雰囲気や文化についていけるか不安（外側への不安）">会社の雰囲気や文化についていけるか不安（外側への不安）</option><option value="配属後のキャリアパス">配属後のキャリアパス</option><option value="その他">その他</option></select></div>
+  <div><div class="small" style="margin-bottom:6px">Q3. Q2の項目に対する不安度（1〜10）</div>
+  <select id="q3" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
+  <div><div class="small" style="margin-bottom:6px">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
+  <select id="q4" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="可処分時間の不足">可処分時間の不足</option><option value="取得の目的が不透明">取得の目的が不透明</option><option value="何から手をつければいいかわからない">何から手をつければいいかわからない</option><option value="勉強法">勉強法</option><option value="学びの成果が実感できない">学びの成果が実感できない</option><option value="その他">その他</option></select></div>
+  <div><div class="small" style="margin-bottom:6px">Q5. Q4の項目に対する不安度（1〜10）</div>
+  <select id="q5" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
+</div>
+```
 <div class="btns"><button class="btn p" onclick="submitCheckin()">送信して完了</button><button class="btn" onclick="skipCheckin()">入力せず完了</button></div>
 <div id="checkinMsg2" class="small" data-crypt style="margin-top:10px"></div>
 </div></div>
@@ -245,12 +218,16 @@ window.checkReward=function(){
   var val=(document.getElementById('rewardInput').value||'').trim();
   var msg=document.getElementById('rewardMsg');
   if(rewardStep===0){
-    if(val==='前半'){
-      rewardStep=1;
-      document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
-      document.getElementById('rewardInput').value='';
-      msg.textContent='OK: 前半コード認証';
-    } else {
+   if(val==='前半'){
+  rewardStep=1;
+  document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
+  document.getElementById('rewardInput').value='';
+  msg.textContent='OK: 前半コード認証';
+  nodes().forEach(function(n){
+    var base=remember(n);
+    n.textContent=keepStr(base,.5);
+  });
+}else {
       msg.textContent='NG: コードが違います';
       window.x404();
     }
