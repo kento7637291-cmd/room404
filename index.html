@@ -604,14 +604,14 @@ window.skipCheckin=function(){
   };
 
   // Enter key (entry modal)
-  document.addEventListener('keydown',function(e)
-  if(sessionStorage.getItem('room404_returned')==='1'){
+  document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var a=document.activeElement;if(a&&a.id==='entryCode'){e.preventDefault();window.confirmEntry();}});
+if(sessionStorage.getItem('room404_returned')==='1'){
   sessionStorage.removeItem('room404_returned');
   document.body.classList.add('restored');
   var retMsg=document.getElementById('restoreMsg');
   retMsg.style.display='flex';
   setTimeout(function(){retMsg.classList.add('on');},50);
-}{if(e.key!=='Enter')return;var a=document.activeElement;if(a&&a.id==='entryCode'){e.preventDefault();window.confirmEntry();}});
+}
 
   // initial light crypt (30%)
   // 元テキストを先に全部記憶してからlightCrypt
@@ -673,12 +673,7 @@ window.skipCheckin=function(){
         株式会社room404の存在は消えてしまったようだ。手元には、謎の内定通知書だけが残っている。
       </p>
     </div>
-    <div style="background:#f4f4f4;border-radius:8px;padding:20px 24px;display:flex;align-items:center;gap:16px;">
-      <div class="loader"></div>
-      <span style="font-size:14px;color:#555;">SHIFTのクレドページへ遷移しています。その後またこのサイトに戻ってきてください。</span>
-    </div>
-  </div>
-</div>
+    
 <div id="finalMsg" style="display:none;">
   <div class="inner">この仮想世界は
 「SHIFTで働く上で必要な"スキル"をデータとして可視化した世界」
