@@ -333,9 +333,13 @@ window.submitSurvey=function(){
   };
   fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(function(){
-    msg.textContent='';
-    btn.style.display='none';
-    document.getElementById('startBtn').style.display='block';
+    // アンケート画面をフェードアウトして次の画面へ
+    document.getElementById('surveyScreen').style.transition='opacity .8s ease';
+    document.getElementById('surveyScreen').style.opacity='0';
+    setTimeout(function(){
+      document.getElementById('surveyScreen').style.display='none';
+      document.getElementById('waitScreen').style.display='flex';
+    },800);
   },1200);
 };
 
@@ -481,4 +485,5 @@ window.showEnding=function(){
   },100);
 };
 })();</script>
+
 </body></html>
