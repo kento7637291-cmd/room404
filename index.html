@@ -439,17 +439,26 @@ function showReveal(){
         clearInterval(id);
         // revealOverlayを閉じてhaku-modeへ移行
         setTimeout(function(){
+    var txt=document.getElementById('revealTxt');
+    var base=txt.textContent;
+    var keep=0.0;
+    var id=setInterval(function(){
+      keep=Math.min(1.0,keep+0.07);
+      txt.textContent=keepStr(base,1-keep);
+      if(keep>=1.0){
+        clearInterval(id);
+        // revealOverlayを閉じてhaku-modeへ移行
+        setTimeout(function(){
           ov.style.opacity='0';
           ov.style.pointerEvents='none';
           document.body.classList.add('haku-mode');
-          // hakuTop以外の全data-crypt要素をzalgo化
-         var hakuEl=document.getElementById('hakuTop');
+          // 元テキストをORIGから取得してzalgo化（keepStrで汚染される前の値を使う）
+          var hakuEl=document.getElementById('hakuTop');
           nodes().forEach(function(n){
             if(hakuEl.contains(n))return;
-            var base=remember(n);
-            var z=zalgoStr(base);
-            n.textContent=z;
-            ORIG.set(n,base); // zalgo後も元テキストを保持（復元用）
+            var orig=ORIG.get(n)||n.textContent; // 初期化時に記憶した元テキスト
+            ORIG.set(n,orig); // 確実に保持
+            n.textContent=zalgoStr(orig);
           });
           // navもzalgo化
           document.querySelectorAll('.nav a span, .nav a').forEach(function(n){
