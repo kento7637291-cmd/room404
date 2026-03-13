@@ -145,7 +145,8 @@ body.haku-mode .infoTable .label{background:rgba(0,0,0,.3);}
 body.haku-mode .fakeMap{background:rgba(0,0,0,.4);}
 #hakuTop{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:40px;text-align:center;}
 body.haku-mode #hakuTop{display:flex;}
-body.restored{background:#f4f4f4;color:#111;transition:background 1.2s ease,color 1.2s ease;}
+body.restored{background:#f4f4f4;color:#111;transition:background 1.2s ease,color 1.2s ease;pointer-events:none;}
+body.restored #restoreMsg{pointer-events:auto;}
 body.restored .section{background:#f4f4f4;}
 body.restored .nav{background:#fff;color:#111;border-bottom:2px solid #ddd;}
 body.restored .nav a{color:#111;}
@@ -524,7 +525,7 @@ window.checkHakuReward=function(){
             // 2秒後にSHIFTサイトへ遷移
             setTimeout(function(){
               window.location.href='https://www.shiftinc.jp/company/philosophy/';
-            },2000);
+            },5000);
           },1200);
         },800);
       },900);
@@ -540,7 +541,7 @@ function showReveal(){
   ov.style.opacity='1';
   ov.style.pointerEvents='auto';
   ov.classList.add('glitching');
-  setTimeout(function(){ov.classList.remove('glitching');},3600);
+  setTimeout(function(){ov.classList.remove('glitching');},7200);
   setTimeout(function(){
     var txt=document.getElementById('revealTxt');
     var base=txt.textContent;
@@ -575,7 +576,7 @@ function showReveal(){
         },800);
       }
     },65);
-  },12000);
+  },6000);
 }
 window.checkReward=function(){
   var val=(document.getElementById('rewardInput').value||'').trim();
