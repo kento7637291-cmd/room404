@@ -1,137 +1,75 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>株式会社room404</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,"Helvetica Neue",Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}body{background:#000;color:#fff;overflow-x:hidden;scroll-behavior:smooth}#pptSplash{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:#000}#pptSplash img{width:100%;height:100%;object-fit:contain;background:#000}.scrollGuide{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.65;letter-spacing:.18em;user-select:none;animation:blink 1.5s infinite}@keyframes blink{0%{opacity:.15}50%{opacity:.85}100%{opacity:.15}}.section{min-height:auto;padding:12px 10% 24px;background:#0a0a0a}.nav{position:fixed;top:0;left:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);z-index:100}.nav a{color:#fff;margin-left:26px;text-decoration:none;font-weight:650;cursor:pointer;display:inline-flex;gap:.35em;align-items:center}.nav a:hover{opacity:.65}h1{font-size:46px;margin-bottom:34px;line-height:1.1}.small{font-size:12px;opacity:.78;line-height:1.7}/* 404 overlay */.fake404{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:0;pointer-events:none;z-index:999;text-align:center;padding:24px;user-select:none;transition:opacity .12s ease}.fake404.active{opacity:1;pointer-events:auto}/* global fx */body.globalGarbled{animation:globalFlicker 1.6s ease-in-out}@keyframes globalFlicker{0%{filter:none}15%{filter:contrast(1.35)saturate(1.15)blur(.4px)}35%{filter:contrast(1.55)saturate(1.25)blur(.8px)}55%{filter:contrast(1.15)saturate(.95)blur(.2px)}100%{filter:none}}body.globalGarbled::before{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 4px),radial-gradient(900px 420px at 70% 10%,rgba(20,99,255,.12),transparent 60%),radial-gradient(900px 420px at 30% 80%,rgba(255,92,122,.10),transparent 60%);mix-blend-mode:screen;opacity:.65}/* modal */.modalBack{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .16s ease;z-index:500}.modalBack.on{opacity:1;pointer-events:auto}.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(760px,92vw);background:rgba(12,12,12,.92);border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);padding:18px;opacity:0;pointer-events:none;transition:opacity .16s ease,transform .16s ease;z-index:501}.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}.modal .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modal .hd .t{font-weight:800;letter-spacing:.08em}.modal .x{border:none;background:transparent;color:#fff;font-size:20px;cursor:pointer;opacity:.7}.modal .x:hover{opacity:1}.card{max-width:720px;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}.ip{width:100%;padding:14px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:#fff;font-size:18px;outline:none}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn{padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer}.btn:hover{opacity:.85}.btn.p{background:rgba(20,99,255,.25)}[data-crypt]{white-space:pre-wrap}
-#revealOverlay{position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;overflow-y:auto;}
-#revealOverlay.on{opacity:1;pointer-events:auto;}
-#revealOverlay .bg{position:absolute;inset:0;background:url('haku.jpeg') center/cover no-repeat;opacity:.55;}
-#revealOverlay .txt{position:relative;z-index:1;max-width:700px;padding:40px;text-align:center;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);}
-#rewardBox{margin-top:32px;display:none;text-align:center;position:relative;z-index:10;}
-#rewardBox input{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;position:relative;z-index:10;}
-#rewardBox .rMsg{font-size:12px;opacity:.7;margin-top:8px;min-height:18px;}
-#finalMsg{position:fixed;inset:0;z-index:700;display:flex;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;transition:opacity 3s ease;padding:40px;}
-#finalMsg.on{opacity:1;pointer-events:auto;}
-#finalMsg .inner{max-width:660px;font-size:17px;line-height:2.1;text-align:center;letter-spacing:.05em;white-space:pre-wrap;}
-@keyframes glitchIn{
-  0%{clip-path:inset(40% 0 60% 0);transform:translate(-4px,0);}
-  10%{clip-path:inset(10% 0 85% 0);transform:translate(4px,0);}
-  20%{clip-path:inset(70% 0 5% 0);transform:translate(-6px,0);}
-  30%{clip-path:inset(30% 0 50% 0);transform:translate(6px,0);}
-  40%{clip-path:inset(55% 0 30% 0);transform:translate(-3px,0);}
-  50%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}
-  60%{clip-path:inset(20% 0 60% 0);transform:translate(5px,0);}
-  70%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}
-  80%{clip-path:inset(5% 0 80% 0);transform:translate(-4px,0);}
-  90%{clip-path:inset(0% 0 0% 0);transform:translate(2px,0);}
-  100%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}
-}
-@keyframes glitchIn2{
-  0%{clip-path:inset(60% 0 20% 0);transform:translate(5px,0);}
-  20%{clip-path:inset(20% 0 70% 0);transform:translate(-5px,0);}
-  40%{clip-path:inset(80% 0 5% 0);transform:translate(3px,0);}
-  60%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}
-  80%{clip-path:inset(40% 0 40% 0);transform:translate(-3px,0);}
-  100%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}
-}
-#revealOverlay.glitching::before{
-  content:'';position:absolute;inset:0;
-  background:inherit;
-  animation:glitchIn2 .18s steps(1) infinite;
-  mix-blend-mode:screen;
-  opacity:.6;
-  pointer-events:none;
-  z-index:0;
-}
-#revealOverlay.glitching{animation:glitchIn .22s steps(1) 4;}
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>株式会社room404</title><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,"Helvetica Neue",Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
+body{background:#000;color:#fff;overflow-x:hidden;scroll-behavior:smooth}
 
-  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.panel{
-  background:rgba(255,255,255,0.05);
-  padding:22px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.10);
-  backdrop-filter:blur(8px);
+/* ========== アンケート画面 ========== */
+#surveyScreen{
+  position:fixed;inset:0;z-index:900;
+  background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;overflow-y:auto;
 }
-.panelTitle{
-  font-size:20px;
-  font-weight:800;
-  margin-bottom:12px;
-  line-height:1.5;
+#surveyScreen .survey-inner{width:100%;max-width:560px;}
+#surveyScreen .survey-title{font-size:13px;letter-spacing:.25em;color:#1463ff;margin-bottom:8px;}
+#surveyScreen .survey-head{font-size:28px;font-weight:900;line-height:1.3;margin-bottom:28px;}
+#surveyScreen .survey-head span{color:#1463ff;}
+.sv-block{margin-bottom:18px;}
+.sv-label{font-size:12px;opacity:.65;letter-spacing:.08em;margin-bottom:6px;}
+.sv-input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#fff;font-size:15px;outline:none;transition:border-color .15s;}
+.sv-input:focus{border-color:#1463ff;}
+.sv-input option{background:#111;color:#fff;}
+.sv-btn{width:100%;padding:14px;border-radius:10px;border:none;background:#1463ff;color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-top:8px;transition:opacity .15s;letter-spacing:.05em;}
+.sv-btn:hover{opacity:.85;}
+.sv-btn:disabled{opacity:.4;cursor:not-allowed;}
+#surveyMsg{font-size:12px;opacity:.6;margin-top:10px;min-height:16px;text-align:center;}
+#startBtn{
+  display:none;width:100%;padding:16px;border-radius:10px;border:none;
+  background:linear-gradient(135deg,#1463ff,#0040cc);
+  color:#fff;font-size:18px;font-weight:900;cursor:pointer;margin-top:16px;
+  letter-spacing:.1em;
+  animation:pulseBtn 1.8s ease-in-out infinite;
 }
-.widePanel{max-width:920px}
-.infoTable{
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:16px;
-  overflow:hidden;
-  background:rgba(255,255,255,.04);
-}
-.infoTable .row{
-  display:grid;
-  grid-template-columns:220px 1fr;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.infoTable .row:last-child{border-bottom:none}
-.infoTable .row > div{padding:18px}
-.infoTable .label{
-  background:rgba(255,255,255,.04);
-  font-weight:700;
-}
-.mapPanel{min-height:260px;display:flex;align-items:center;justify-content:center}
-.fakeMap{
-  width:100%;
-  min-height:220px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.12);
-  background:
-    linear-gradient(rgba(20,99,255,.08),rgba(20,99,255,.04)),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 28px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 28px),
-    rgba(0,0,0,.28);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-  line-height:2;
-}
-.footer{
-  padding:60px 10% 26px;
-  background:#030303;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-.footerGrid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
-  gap:40px;
-}
-.footerLogo{
-  font-size:24px;
-  font-weight:800;
-}
-.footerHead{
-  font-size:14px;
-  letter-spacing:.12em;
-  opacity:.7;
-  margin-bottom:14px;
-}
-.footer a{
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  margin-bottom:10px;
-  opacity:.88;
-  cursor:pointer;
-}
-.footer a:hover{opacity:.6}
-.footerBottom{
-  margin-top:32px;
-  padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.08);
-  opacity:.6;
-}
-@media (max-width:800px){
-  .infoTable .row{grid-template-columns:1fr}
-  .footerGrid{grid-template-columns:1fr}
-}
-  body.haku-mode{background:url('haku.jpeg') center/cover no-repeat fixed;}
+@keyframes pulseBtn{0%,100%{box-shadow:0 0 0 0 rgba(20,99,255,.5);}50%{box-shadow:0 0 0 12px rgba(20,99,255,0);}}
+
+/* ========== サイト本体 ========== */
+#siteBody{display:none;}
+.section{min-height:auto;padding:12px 10% 24px;background:#0a0a0a;}
+.nav{position:fixed;top:0;left:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);z-index:100;}
+.nav a{color:#fff;margin-left:26px;text-decoration:none;font-weight:650;cursor:pointer;display:inline-flex;gap:.35em;align-items:center;}
+.nav a:hover{opacity:.65;}
+h1{font-size:46px;margin-bottom:34px;line-height:1.1;}
+.small{font-size:12px;opacity:.78;line-height:1.7;}
+.fake404{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:0;pointer-events:none;z-index:999;text-align:center;padding:24px;user-select:none;transition:opacity .12s ease;}
+.fake404.active{opacity:1;pointer-events:auto;}
+body.globalGarbled{animation:globalFlicker 1.6s ease-in-out;}
+@keyframes globalFlicker{0%{filter:none}15%{filter:contrast(1.35)saturate(1.15)blur(.4px)}35%{filter:contrast(1.55)saturate(1.25)blur(.8px)}55%{filter:contrast(1.15)saturate(.95)blur(.2px)}100%{filter:none}}
+body.globalGarbled::before{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 4px),radial-gradient(900px 420px at 70% 10%,rgba(20,99,255,.12),transparent 60%),radial-gradient(900px 420px at 30% 80%,rgba(255,92,122,.10),transparent 60%);mix-blend-mode:screen;opacity:.65;}
+[data-crypt]{white-space:pre-wrap;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.panel{background:rgba(255,255,255,0.05);padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,0.10);backdrop-filter:blur(8px);}
+.panelTitle{font-size:20px;font-weight:800;margin-bottom:12px;line-height:1.5;}
+.widePanel{max-width:920px;}
+.infoTable{border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.04);}
+.infoTable .row{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid rgba(255,255,255,.08);}
+.infoTable .row:last-child{border-bottom:none;}
+.infoTable .row>div{padding:18px;}
+.infoTable .label{background:rgba(255,255,255,.04);font-weight:700;}
+.mapPanel{min-height:260px;display:flex;align-items:center;justify-content:center;}
+.fakeMap{width:100%;min-height:220px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(20,99,255,.08),rgba(20,99,255,.04)),repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 28px),rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;line-height:2;}
+.btn{padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;}
+.btn:hover{opacity:.85;}
+.footer{padding:60px 10% 26px;background:#030303;border-top:1px solid rgba(255,255,255,.08);}
+.footerGrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+.footerLogo{font-size:24px;font-weight:800;}
+.footerHead{font-size:14px;letter-spacing:.12em;opacity:.7;margin-bottom:14px;}
+.footer a{display:block;color:#fff;text-decoration:none;margin-bottom:10px;opacity:.88;cursor:pointer;}
+.footer a:hover{opacity:.6;}
+.footerBottom{margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);opacity:.6;}
+@media(max-width:800px){.infoTable .row{grid-template-columns:1fr}.footerGrid{grid-template-columns:1fr}}
+
+/* ========== haku-mode ========== */
+body.haku-mode{background:url('haku.jpeg') center/cover no-repeat fixed;}
 body.haku-mode .section{background:rgba(0,0,0,.55);}
 body.haku-mode .panel{background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);}
 body.haku-mode .nav{background:rgba(0,0,0,.6);}
@@ -140,344 +78,270 @@ body.haku-mode .infoTable .label{background:rgba(0,0,0,.3);}
 body.haku-mode .fakeMap{background:rgba(0,0,0,.4);}
 #hakuTop{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:40px;text-align:center;}
 body.haku-mode #hakuTop{display:flex;}
-body.restored{background:#f4f4f4;color:#111;transition:background 1.2s ease,color 1.2s ease;pointer-events:none;}
-body.restored #restoreMsg{pointer-events:auto;}
-body.restored .section{background:#f4f4f4;}
-body.restored .nav{background:#fff;color:#111;border-bottom:2px solid #ddd;}
-body.restored .nav a{color:#111;}
-body.restored .panel{background:#fff;border-color:#ddd;color:#111;}
-body.restored .panelTitle{color:#111;}
-body.restored .infoTable{background:#fff;border-color:#ddd;}
-body.restored .infoTable .row{border-color:#ddd;}
-body.restored .infoTable .label{background:#f4f4f4;color:#111;}
-body.restored .infoTable .row>div{color:#111;}
-body.restored .fakeMap{background:#eee;color:#111;}
-body.restored .footer{background:#fff;border-color:#ddd;color:#111;}
-body.restored h1{color:#111;}
-body.restored .small{color:#555;}
-body.restored .nav a span,body.restored .footerLogo,body.restored .footerHead{color:#111;}
-body.restored .footer a{color:#555;}
-body.restored .footerBottom{color:#999;}
-<div style="position:relative;z-index:1;max-width:660px;padding:40px;text-align:center;font-size:17px;line-height:2.1;letter-spacing:.05em;color:#fff;">
-#restoreMsg .loader{width:48px;height:48px;border:4px solid #ddd;border-top:4px solid #e60012;border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ========== revealOverlay ========== */
+#revealOverlay{position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;overflow-y:auto;}
+#revealOverlay .bg{position:absolute;inset:0;background:url('haku.jpeg') center/cover no-repeat;opacity:.55;}
+#revealOverlay .txt{position:relative;z-index:1;max-width:700px;padding:40px;text-align:center;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);}
+@keyframes glitchIn{0%{clip-path:inset(40% 0 60% 0);transform:translate(-4px,0);}10%{clip-path:inset(10% 0 85% 0);transform:translate(4px,0);}20%{clip-path:inset(70% 0 5% 0);transform:translate(-6px,0);}30%{clip-path:inset(30% 0 50% 0);transform:translate(6px,0);}40%{clip-path:inset(55% 0 30% 0);transform:translate(-3px,0);}50%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}60%{clip-path:inset(20% 0 60% 0);transform:translate(5px,0);}70%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}80%{clip-path:inset(5% 0 80% 0);transform:translate(-4px,0);}90%{clip-path:inset(0% 0 0% 0);transform:translate(2px,0);}100%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}}
+@keyframes glitchIn2{0%{clip-path:inset(60% 0 20% 0);transform:translate(5px,0);}20%{clip-path:inset(20% 0 70% 0);transform:translate(-5px,0);}40%{clip-path:inset(80% 0 5% 0);transform:translate(3px,0);}60%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}80%{clip-path:inset(40% 0 40% 0);transform:translate(-3px,0);}100%{clip-path:inset(0% 0 0% 0);transform:translate(0,0);}}
+#revealOverlay.glitching::before{content:'';position:absolute;inset:0;background:inherit;animation:glitchIn2 .18s steps(1) infinite;mix-blend-mode:screen;opacity:.6;pointer-events:none;z-index:0;}
+#revealOverlay.glitching{animation:glitchIn .22s steps(1) 4;}
 </style>
+</head><body>
 
-</style></head><body>
+<!-- ========== アンケート画面 ========== -->
+<div id="surveyScreen">
+  <div class="survey-inner">
+    <div class="survey-title">ROOM404 // ENTRY SYSTEM</div>
+    <h2 class="survey-head">接続認証を開始します。<br><span>データを入力してください。</span></h2>
 
-<section id="pptSplash" style="display:none;"></section>
-<div id="hakuTop">
-  <div id="hakuTxt" style="max-width:700px;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);text-align:center;"></div>
-  <div style="margin-top:32px;text-align:center;">
-    <div id="hakuRewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;color:#fff;">報酬コード（1つめ）を入力</div>
-    <input id="hakuRewardInput" type="text" placeholder="コードを入力" autocomplete="off" style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;">
-    <div onclick="checkHakuReward()" style="display:inline-block;margin-top:10px;cursor:pointer;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(20,99,255,.25);color:#fff;font-weight:800;">決定</div>
-    <div id="hakuRewardMsg" style="font-size:12px;opacity:.7;margin-top:8px;min-height:18px;color:#fff;"></div>
+    <div class="sv-block">
+      <div class="sv-label">入室コード（任意）</div>
+      <input id="entryCode" class="sv-input" type="text" placeholder="例）room404 / kento2026" autocomplete="off">
+    </div>
+    <div class="sv-block">
+      <div class="sv-label">Q1. 入社に向けての不安度（1〜10）</div>
+      <select id="q1" class="sv-input"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select>
+    </div>
+    <div class="sv-block">
+      <div class="sv-label">Q2. 特に不安な点</div>
+      <select id="q2" class="sv-input"><option value="" selected>選択してください</option><option value="同期となじめるか不安（横への不安）">同期となじめるか不安（横への不安）</option><option value="先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）">先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option value="業務に必要なスキル・能力が足りているか不安（内側への不安）">業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option value="論理的思考やアウトプットができるか不安（内側への不安）">論理的思考やアウトプットができるか不安（内側への不安）</option><option value="会社の雰囲気や文化についていけるか不安（外側への不安）">会社の雰囲気や文化についていけるか不安（外側への不安）</option><option value="配属後のキャリアパス">配属後のキャリアパス</option><option value="その他">その他</option></select>
+    </div>
+    <div class="sv-block">
+      <div class="sv-label">Q3. Q2の項目に対する不安度（1〜10）</div>
+      <select id="q3" class="sv-input"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select>
+    </div>
+    <div class="sv-block">
+      <div class="sv-label">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
+      <select id="q4" class="sv-input"><option value="" selected>選択してください</option><option value="可処分時間の不足">可処分時間の不足</option><option value="取得の目的が不透明">取得の目的が不透明</option><option value="何から手をつければいいかわからない">何から手をつければいいかわからない</option><option value="勉強法">勉強法</option><option value="学びの成果が実感できない">学びの成果が実感できない</option><option value="その他">その他</option></select>
+    </div>
+    <div class="sv-block">
+      <div class="sv-label">Q5. Q4の項目に対する不安度（1〜10）</div>
+      <select id="q5" class="sv-input"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select>
+    </div>
+
+    <button class="sv-btn" id="submitSurveyBtn" onclick="submitSurvey()">送信する</button>
+    <div id="surveyMsg"></div>
+    <button id="startBtn" onclick="startGame()">▶ ゲームスタート</button>
   </div>
 </div>
 
-<div class="nav">
-  <div><a onclick="glitchScroll('officialTop')"><span data-crypt>room404</span></a></div>
-  <div>
-    <a onclick="glitchScroll('philosophySection')"><span data-crypt>企業理念</span></a>
-    <a onclick="glitchScroll('servicesSection')"><span data-crypt>事業内容</span></a>
-    <a onclick="glitchScroll('recruitSection')"><span data-crypt>採用情報</span></a>
-    <a onclick="glitchScroll('accessSection')"><span data-crypt>アクセス</span></a>
-    <a onclick="goEntry()"><span data-crypt>お問い合わせ</span></a>
+<!-- ========== revealOverlay ========== -->
+<div id="revealOverlay">
+  <div class="bg"></div>
+  <div style="position:absolute;top:0;left:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;z-index:2;">
+    <span data-crypt style="font-weight:800;">room404</span>
+    <div>
+      <span data-crypt style="margin-left:26px;opacity:.7;">企業理念</span>
+      <span data-crypt style="margin-left:26px;opacity:.7;">事業内容</span>
+      <span data-crypt style="margin-left:26px;opacity:.7;">採用情報</span>
+    </div>
   </div>
+  <div class="txt" id="revealTxt">この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>しかし、本来は研修用の簡易システムだったものが<br>想定外のエラー(404)により暴走<br><br>システムから送られてきた謎の内定通知書を手に会場に来た参加者は<br>"研修用のデータに実体ごと取り込まれた存在となってしまった"</div>
 </div>
-<section class="section" id="officialTop">
-  <div style="margin-bottom: 60px; border-left: 4px solid #1463ff; padding-left: 20px;">
-    <h1 data-crypt style="font-size: 52px;">すべての才能を、<br>データで価値に変える。</h1>
-    <p data-crypt style="font-size: 18px; opacity: 0.8;">株式会社room404は、仮想空間におけるスキル可視化プラットフォームを提供しています。</p>
-  </div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px;">
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-      <div class="small" style="color: #1463ff;">NEWS / 2026.03.01</div>
-      <div data-crypt style="font-weight: bold; margin-top: 8px;">2027年度新卒採用：適性検査プログラムのアップデート完了</div>
-    </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-      <div class="small" style="color: #1463ff;">PRESS / 2026.02.15</div>
-      <div data-crypt style="font-weight: bold; margin-top: 8px;">次世代業務環境『SHIFT-Core』の404エラー対策パッチを公開</div>
+<!-- ========== サイト本体 ========== -->
+<div id="siteBody">
+  <div class="fake404" id="fake404"><span data-crypt>404 Not Found...</span></div>
+
+  <div id="hakuTop">
+    <div id="hakuTxt" style="max-width:700px;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);text-align:center;"></div>
+    <div style="margin-top:32px;text-align:center;">
+      <div id="hakuRewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;color:#fff;">報酬コード（1つめ）を入力</div>
+      <input id="hakuRewardInput" type="text" placeholder="コードを入力" autocomplete="off" style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;">
+      <div onclick="checkHakuReward()" style="display:inline-block;margin-top:10px;cursor:pointer;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(20,99,255,.25);color:#fff;font-weight:800;">決定</div>
+      <div id="hakuRewardMsg" style="font-size:12px;opacity:.7;margin-top:8px;min-height:18px;color:#fff;"></div>
     </div>
   </div>
 
-  <p class="small" data-crypt style="margin-top:40px; opacity: 0.5;">※現在システムの一部に不具合が発生しており、表示が乱れる場合がございます。</p>
-</section>
+  <div class="nav">
+    <div><a onclick="glitchScroll('officialTop')"><span data-crypt>room404</span></a></div>
+    <div>
+      <a onclick="glitchScroll('philosophySection')"><span data-crypt>企業理念</span></a>
+      <a onclick="glitchScroll('servicesSection')"><span data-crypt>事業内容</span></a>
+      <a onclick="glitchScroll('recruitSection')"><span data-crypt>採用情報</span></a>
+      <a onclick="glitchScroll('accessSection')"><span data-crypt>アクセス</span></a>
+    </div>
+  </div>
+
+  <section class="section" id="officialTop" style="padding-top:80px;">
+    <div style="margin-bottom:60px;border-left:4px solid #1463ff;padding-left:20px;">
+      <h1 data-crypt style="font-size:52px;">すべての才能を、<br>データで価値に変える。</h1>
+      <p data-crypt style="font-size:18px;opacity:0.8;">株式会社room404は、仮想空間におけるスキル可視化プラットフォームを提供しています。</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px;">
+      <div style="background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);">
+        <div class="small" style="color:#1463ff;">NEWS / 2026.03.01</div>
+        <div data-crypt style="font-weight:bold;margin-top:8px;">2027年度新卒採用：適性検査プログラムのアップデート完了</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);">
+        <div class="small" style="color:#1463ff;">PRESS / 2026.02.15</div>
+        <div data-crypt style="font-weight:bold;margin-top:8px;">次世代業務環境『SHIFT-Core』の404エラー対策パッチを公開</div>
+      </div>
+    </div>
+    <p class="small" data-crypt style="margin-top:40px;opacity:0.5;">※現在システムの一部に不具合が発生しており、表示が乱れる場合がございます。</p>
+  </section>
 
   <section class="section" id="newsSection">
-  <h1 data-crypt>News</h1>
-  <div class="grid3">
-    <div class="panel">
-      <div class="small" style="color:#1463ff;">NEWS / 2026.03.01</div>
-      <div data-crypt class="panelTitle">2027年度新卒採用：適性検査プログラムのアップデート完了</div>
-      <p class="small" data-crypt>一部受検者において認識レイヤーの遅延が発生しています。</p>
+    <h1 data-crypt>News</h1>
+    <div class="grid3">
+      <div class="panel"><div class="small" style="color:#1463ff;">NEWS / 2026.03.01</div><div data-crypt class="panelTitle">2027年度新卒採用：適性検査プログラムのアップデート完了</div><p class="small" data-crypt>一部受検者において認識レイヤーの遅延が発生しています。</p></div>
+      <div class="panel"><div class="small" style="color:#1463ff;">PRESS / 2026.02.15</div><div data-crypt class="panelTitle">次世代業務環境「SHIFT-Core」安定化パッチを公開</div><p class="small" data-crypt>404系障害に対する暫定対策を含みます。</p></div>
+      <div class="panel"><div class="small" style="color:#1463ff;">NOTICE / 2026.02.07</div><div data-crypt class="panelTitle">社員データ同期の不整合について</div><p class="small" data-crypt>現在、一部ユーザーの存在ログが正常に参照できません。</p></div>
     </div>
-    <div class="panel">
-      <div class="small" style="color:#1463ff;">PRESS / 2026.02.15</div>
-      <div data-crypt class="panelTitle">次世代業務環境「SHIFT-Core」安定化パッチを公開</div>
-      <p class="small" data-crypt>404系障害に対する暫定対策を含みます。</p>
-    </div>
-    <div class="panel">
-      <div class="small" style="color:#1463ff;">NOTICE / 2026.02.07</div>
-      <div data-crypt class="panelTitle">社員データ同期の不整合について</div>
-      <p class="small" data-crypt>現在、一部ユーザーの存在ログが正常に参照できません。</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="philosophySection">
-  <h1 data-crypt>企業理念</h1>
-  <div class="panel widePanel">
-    <p data-crypt style="font-size:20px;line-height:2;">
-      すべての才能を、データで価値に変える。<br>
-      room404は、個人の思考・行動・対話を解析し、
-      仮想空間における最適な成長環境を設計します。
-    </p>
-  </div>
-</section>
+  <section class="section" id="philosophySection">
+    <h1 data-crypt>企業理念</h1>
+    <div class="panel widePanel">
+      <p data-crypt style="font-size:20px;line-height:2;">すべての才能を、データで価値に変える。<br>room404は、個人の思考・行動・対話を解析し、仮想空間における最適な成長環境を設計します。</p>
+    </div>
+  </section>
 
-<section class="section" id="servicesSection">
-  <h1 data-crypt>事業内容</h1>
-  <div class="grid3">
-    <div class="panel">
-      <div class="panelTitle" data-crypt>Skill Mapping Platform</div>
-      <p class="small" data-crypt>個人の思考・対話・構造化能力を可視化し、成長ポテンシャルを抽出します。</p>
+  <section class="section" id="servicesSection">
+    <h1 data-crypt>事業内容</h1>
+    <div class="grid3">
+      <div class="panel"><div class="panelTitle" data-crypt>Skill Mapping Platform</div><p class="small" data-crypt>個人の思考・対話・構造化能力を可視化し、成長ポテンシャルを抽出します。</p></div>
+      <div class="panel"><div class="panelTitle" data-crypt>Virtual Training Environment</div><p class="small" data-crypt>仮想業務空間で研修体験を生成し、実践的な行動ログを取得します。</p></div>
+      <div class="panel"><div class="panelTitle" data-crypt>Behavior Archive Engine</div><p class="small" data-crypt>行動履歴から適性と配属可能性を分析します。※一部現実層と干渉中</p></div>
     </div>
-    <div class="panel">
-      <div class="panelTitle" data-crypt>Virtual Training Environment</div>
-      <p class="small" data-crypt>仮想業務空間で研修体験を生成し、実践的な行動ログを取得します。</p>
-    </div>
-    <div class="panel">
-      <div class="panelTitle" data-crypt>Behavior Archive Engine</div>
-      <p class="small" data-crypt>行動履歴から適性と配属可能性を分析します。※一部現実層と干渉中</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="companySection">
-  <h1 data-crypt>会社概要</h1>
-  <div class="infoTable">
-    <div class="row"><div class="label" data-crypt>社名</div><div data-crypt>株式会社room404</div></div>
-    <div class="row"><div class="label" data-crypt>設立</div><div data-crypt>2026年4月1日</div></div>
-    <div class="row"><div class="label" data-crypt>代表者</div><div data-crypt>未登録</div></div>
-    <div class="row"><div class="label" data-crypt>所在地</div><div data-crypt>東京都新宿区西新宿4-0-4 room404ビル 12F</div></div>
-    <div class="row"><div class="label" data-crypt>事業内容</div><div data-crypt>仮想空間における人材適性可視化基盤の開発・運用</div></div>
-    <div class="row"><div class="label" data-crypt>従業員数</div><div data-crypt>404名</div></div>
-    <div class="row"><div class="label" data-crypt>認証状態</div><div data-crypt>一部破損</div></div>
-  </div>
-</section>
+  <section class="section" id="companySection">
+    <h1 data-crypt>会社概要</h1>
+    <div class="infoTable">
+      <div class="row"><div class="label" data-crypt>社名</div><div data-crypt>株式会社room404</div></div>
+      <div class="row"><div class="label" data-crypt>設立</div><div data-crypt>2026年4月1日</div></div>
+      <div class="row"><div class="label" data-crypt>代表者</div><div data-crypt>未登録</div></div>
+      <div class="row"><div class="label" data-crypt>所在地</div><div data-crypt>東京都新宿区西新宿4-0-4 room404ビル 12F</div></div>
+      <div class="row"><div class="label" data-crypt>事業内容</div><div data-crypt>仮想空間における人材適性可視化基盤の開発・運用</div></div>
+      <div class="row"><div class="label" data-crypt>従業員数</div><div data-crypt>404名</div></div>
+      <div class="row"><div class="label" data-crypt>認証状態</div><div data-crypt>一部破損</div></div>
+    </div>
+  </section>
 
-<section class="section" id="recruitSection">
-  <h1 data-crypt>採用情報</h1>
-  <div class="grid2">
-    <div class="panel">
-      <div class="panelTitle" data-crypt>求める人物像</div>
-      <p class="small" data-crypt>
-        変化する環境でも、自分なりの解を出せる方。<br>
-        不確実性の中でも、対話し、整理し、前進できる方。
-      </p>
+  <section class="section" id="recruitSection">
+    <h1 data-crypt>採用情報</h1>
+    <div class="grid2">
+      <div class="panel"><div class="panelTitle" data-crypt>求める人物像</div><p class="small" data-crypt>変化する環境でも、自分なりの解を出せる方。<br>不確実性の中でも、対話し、整理し、前進できる方。</p></div>
+      <div class="panel"><div class="panelTitle" data-crypt>研修制度</div><p class="small" data-crypt>仮想環境接続研修 / 行動ログ解析演習 / 404復旧演習</p></div>
+      <div class="panel"><div class="panelTitle" data-crypt>配属プロセス</div><p class="small" data-crypt>適性スキャン → 仮想業務体験 → 判定 → 配属</p></div>
+      <div class="panel"><div class="panelTitle" data-crypt>選考フロー</div><p class="small" data-crypt>エントリー → 接続確認 → 適性同期 → 現実復帰</p></div>
     </div>
-    <div class="panel">
-      <div class="panelTitle" data-crypt>研修制度</div>
-      <p class="small" data-crypt>
-        仮想環境接続研修 / 行動ログ解析演習 / 404復旧演習
-      </p>
-    </div>
-    <div class="panel">
-      <div class="panelTitle" data-crypt>配属プロセス</div>
-      <p class="small" data-crypt>
-        適性スキャン → 仮想業務体験 → 判定 → 配属
-      </p>
-    </div>
-    <div class="panel">
-      <div class="panelTitle" data-crypt>選考フロー</div>
-      <p class="small" data-crypt>
-        エントリー → 接続確認 → 適性同期 → 現実復帰
-      </p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="accessSection">
-  <h1 data-crypt>アクセス</h1>
-  <div class="grid2">
-    <div class="panel">
-      <div class="panelTitle" data-crypt>本社</div>
-      <p class="small" data-crypt>
-        東京都新宿区西新宿4-0-4 room404ビル 12F<br>
-        都営大江戸線 都庁前駅 徒歩4分<br>
-        JR新宿駅 徒歩10分
-      </p>
-      <div class="btns">
-        <button class="btn" onclick="x404('MAP DATA LOADING ERROR')">地図を開く</button>
+  <section class="section" id="accessSection">
+    <h1 data-crypt>アクセス</h1>
+    <div class="grid2">
+      <div class="panel">
+        <div class="panelTitle" data-crypt>本社</div>
+        <p class="small" data-crypt>東京都新宿区西新宿4-0-4 room404ビル 12F<br>都営大江戸線 都庁前駅 徒歩4分<br>JR新宿駅 徒歩10分</p>
+        <div style="margin-top:12px;"><button class="btn" onclick="x404('MAP DATA LOADING ERROR')">地図を開く</button></div>
+      </div>
+      <div class="panel mapPanel">
+        <div class="fakeMap" data-crypt>MAP:// SHINJUKU-4-0-4<br><br>[ 現在地を取得しています... ]<br>[ 座標データが一部欠損しています ]</div>
       </div>
     </div>
-    <div class="panel mapPanel">
-      <div class="fakeMap" data-crypt>
-        MAP:// SHINJUKU-4-0-4<br><br>
-        [ 現在地を取得しています... ]<br>
-        [ 座標データが一部欠損しています ]
+  </section>
+
+  <footer class="footer">
+    <div class="footerGrid">
+      <div>
+        <div class="footerLogo" data-crypt>株式会社room404</div>
+        <div class="small" data-crypt style="margin-top:10px;">すべての才能を、データで価値に変える。</div>
+      </div>
+      <div>
+        <div class="footerHead" data-crypt>Site Map</div>
+        <a onclick="glitchScroll('officialTop')"><span data-crypt>トップ</span></a>
+        <a onclick="glitchScroll('newsSection')"><span data-crypt>ニュース</span></a>
+        <a onclick="glitchScroll('servicesSection')"><span data-crypt>事業内容</span></a>
+        <a onclick="glitchScroll('companySection')"><span data-crypt>会社概要</span></a>
+        <a onclick="glitchScroll('recruitSection')"><span data-crypt>採用情報</span></a>
+        <a onclick="glitchScroll('accessSection')"><span data-crypt>アクセス</span></a>
+      </div>
+      <div>
+        <div class="footerHead" data-crypt>Policy</div>
+        <a onclick="x404('404 Not Found')"><span data-crypt>利用規約</span></a>
+        <a onclick="x404('404 Not Found')"><span data-crypt>プライバシーポリシー</span></a>
+        <a onclick="x404('404 Not Found')"><span data-crypt>障害報告</span></a>
       </div>
     </div>
-  </div>
-</section>
+    <div class="footerBottom small" data-crypt>Copyright © room404 Inc. All Rights Reserved.</div>
+  </footer>
+</div><!-- /#siteBody -->
 
-
-<div class="fake404" id="fake404"><span data-crypt>404 Not Found...</span></div>
-
-<div class="modalBack" id="mb" aria-hidden="true"></div>
-<div class="modal" id="m" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="hd"><div class="t" id="mt" data-crypt>お問い合わせ</div><button class="x" aria-label="close" onclick="closeEntry()">✕</button></div><div class="small" data-crypt style="margin:2px 0 12px">現在フォームが壊れています。代わりに <b>入室コード</b> を入力して進んでください（未入力でもOK）。</div>
-  <div class="card" id="entry-step1"><div class="small" data-crypt style="letter-spacing:.3px;margin-bottom:8px">ROOM404://ENTRY</div><input id="entryCode" class="ip" placeholder="例）room404 / kento2026" autocomplete="off"><div class="btns"><button class="btn p" onclick="confirmEntry()">入室して進む</button><button class="btn" onclick="skipEntry()">入力せず進む</button></div><div id="entryMsg" class="small" data-crypt style="margin-top:10px"></div></div>
-
-<div class="card" id="entry-step2" style="display:none;margin-top:12px"><div class="small" style="letter-spacing:.3px;margin-bottom:10px">ROOM404://CHECKIN</div>
-<div style="display:grid;gap:12px">
-  <div><div class="small" style="margin-bottom:6px">Q1. 入社に向けての不安度（1〜10）</div>
-  <select id="q1" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
-  <div><div class="small" style="margin-bottom:6px">Q2. 特に不安な点</div>
-  <select id="q2" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="同期となじめるか不安（横への不安）">同期となじめるか不安（横への不安）</option><option value="先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）">先輩社員とうまくコミュニケーションがとれるか不安（縦への不安）</option><option value="業務に必要なスキル・能力が足りているか不安（内側への不安）">業務に必要なスキル・能力が足りているか不安（内側への不安）</option><option value="論理的思考やアウトプットができるか不安（内側への不安）">論理的思考やアウトプットができるか不安（内側への不安）</option><option value="会社の雰囲気や文化についていけるか不安（外側への不安）">会社の雰囲気や文化についていけるか不安（外側への不安）</option><option value="配属後のキャリアパス">配属後のキャリアパス</option><option value="その他">その他</option></select></div>
-  <div><div class="small" style="margin-bottom:6px">Q3. Q2の項目に対する不安度（1〜10）</div>
-  <select id="q3" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
-  <div><div class="small" style="margin-bottom:6px">Q4. 基本情報技術者試験の勉強で障壁と感じること</div>
-  <select id="q4" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="可処分時間の不足">可処分時間の不足</option><option value="取得の目的が不透明">取得の目的が不透明</option><option value="何から手をつければいいかわからない">何から手をつければいいかわからない</option><option value="勉強法">勉強法</option><option value="学びの成果が実感できない">学びの成果が実感できない</option><option value="その他">その他</option></select></div>
-  <div><div class="small" style="margin-bottom:6px">Q5. Q4の項目に対する不安度（1〜10）</div>
-  <select id="q5" class="ip" style="font-size:16px"><option value="" selected>選択してください</option><option value="1">1（不安はほとんどない）</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10（非常に不安である）</option></select></div>
-</div>
-
-<div class="btns"><button class="btn p" onclick="submitCheckin()">送信して完了</button><button class="btn" onclick="skipCheckin()">入力せず完了</button></div>
-<div id="checkinMsg2" class="small" data-crypt style="margin-top:10px"></div>
-</div></div>
 <script>(function(){'use strict';
-  var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
-  var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
- function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
-  function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
-  var POOL='01/|_-=+*#@$%!?<>[]{}';
-  var ORIG=new WeakMap();
-  function nodes(){return Array.prototype.slice.call(document.querySelectorAll('[data-crypt]'));}
-  function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c==='\n'||c===' ')o+=c;else o+=(Math.random()<k?c:POOL[(Math.random()*POOL.length)|0]);}return o;}
-  function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
-  function forceRemember(n,v){ORIG.set(n,v);}
-  function lightCrypt(){nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.7);});}
-  function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
+var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
+var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
+function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
+function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
+var POOL='01/|_-=+*#@$%!?<>[]{}';
+var ORIG=new WeakMap();
+function nodes(){return Array.prototype.slice.call(document.querySelectorAll('#siteBody [data-crypt]'));}
+function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c==='\n'||c===' ')o+=c;else o+=(Math.random()<k?c:POOL[(Math.random()*POOL.length)|0]);}return o;}
+function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
+function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
-  // ---- splash image (embedded) ----
+var GAS_URL='https://script.google.com/macros/s/AKfycbxGw5tZsditjMxEj-9lgT56lWOK2AnkYnnzrnFKT-r6g5nopFwtEjqi22lG1rxIq9_f1w/exec';
 
-  // ---- 404 overlay (duration 900ms = 3/4) ----
-  window.x404=function(msg){msg=msg||'404 Not Found...';var f=document.getElementById('fake404');var span=f.querySelector('[data-crypt]')||f;f.classList.add('active');var stop=startGarbled(span,msg);setTimeout(function(){stop();f.classList.remove('active');},900);};
+// ---- アンケート送信 ----
+window.submitSurvey=function(){
+  var btn=document.getElementById('submitSurveyBtn');
+  var msg=document.getElementById('surveyMsg');
+  btn.disabled=true;
+  msg.textContent='送信中... システムを照合しています。';
+  var data={
+    '入室コード':(document.getElementById('entryCode').value||'').trim(),
+    'Q1':document.getElementById('q1').value||'',
+    'Q2':document.getElementById('q2').value||'',
+    'Q3':document.getElementById('q3').value||'',
+    'Q4':document.getElementById('q4').value||'',
+    'Q5':document.getElementById('q5').value||''
+  };
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}}).catch(function(){});
+  setTimeout(function(){
+    msg.textContent='';
+    btn.style.display='none';
+    document.getElementById('startBtn').style.display='block';
+  },1200);
+};
 
-  // ---- modal (お問い合わせ: no page move) ----
-  var mb=document.getElementById('mb'), m=document.getElementById('m');
-  function openEntry(){mb.classList.add('on');m.classList.add('on');mb.setAttribute('aria-hidden','false');setTimeout(function(){document.getElementById('entryCode').focus();},0);window.x404('404 Not Found... (opening)');}
-  window.goEntry=openEntry;
-  window.closeEntry=function(){mb.classList.remove('on');m.classList.remove('on');mb.setAttribute('aria-hidden','true');document.getElementById('entryMsg').textContent='';};
-  mb.addEventListener('click',function(){window.closeEntry();});
+// ---- ゲームスタート ----
+window.startGame=function(){
+  document.getElementById('surveyScreen').style.display='none';
+  var site=document.getElementById('siteBody');
+  site.style.display='block';
+  setTimeout(function(){
+    nodes().forEach(function(n){remember(n);});
+    nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.7);});
+    document.body.classList.add('globalGarbled');
+    x404('CRITICAL_ERROR: DATA_CORRUPTION_DETECTED');
+    setTimeout(function(){
+      document.body.classList.remove('globalGarbled');
+      showReveal();
+    },1500);
+  },100);
+};
+
+// ---- 404 overlay ----
+window.x404=function(msg){
+  msg=msg||'404 Not Found...';
+  var f=document.getElementById('fake404');
+  if(!f)return;
+  var span=f.querySelector('[data-crypt]')||f;
+  f.classList.add('active');
+  var stop=startGarbled(span,msg);
+  setTimeout(function(){stop();f.classList.remove('active');},900);
+};
+
 window.glitchScroll=function(id){
   window.x404('SYSTEM TRACE...');
-  setTimeout(function(){
-    var el=document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  },320);
+  setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},320);
 };
 
-window.mini404ThenScroll=function(id){
-  window.x404('404 fragment recovered');
-  setTimeout(function(){
-    var el=document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  },260);
-};
-
-  function toCheckin(){
-  document.getElementById('entry-step1').style.display='none';
-  document.getElementById('entry-step2').style.display='block';
-}
-var GAS_URL='https://script.google.com/macros/s/AKfycbxGw5tZsditjMxEj-9lgT56lWOK2AnkYnnzrnFKT-r6g5nopFwtEjqi22lG1rxIq9_f1w/exec';
-var savedEntryCode='';
-function sendEntryCode(v){
-  savedEntryCode=v||'';
-}
-window.confirmEntry=function(){var v=(document.getElementById('entryCode').value||'').trim();var em=document.getElementById('entryMsg');if(v&&v.length<4){em.textContent='NG: 4文字以上（未入力でもOK）';window.x404();return;}em.textContent=v?('OK: 入室しました：'+v):'OK: 入室しました（未入力）';sendEntryCode(v);lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
-window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
-
-  // ---- global mojibake (text only) ----
-  function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){if(document.body.classList.contains('haku-mode'))return;var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);if(!document.body.classList.contains('haku-mode'))n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
-
-var rewardStep=0;
-var hakuRewardStep=0;
-window.checkHakuReward=function(){
-  var val=(document.getElementById('hakuRewardInput').value||'').trim();
-  var msg=document.getElementById('hakuRewardMsg');
-  if(hakuRewardStep===0){
-    if(val==='前半'){
-      hakuRewardStep=1;
-      document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
-      document.getElementById('hakuRewardInput').value='';
-      msg.textContent='OK: 前半コード認証';
-      var hakuEl=document.getElementById('hakuTop');
-      nodes().forEach(function(n){
-        if(hakuEl.contains(n))return;
-        var orig=ORIG.get(n)||n.textContent;
-        n.textContent=orig.split('').map(function(c){
-          return Math.random()<0.5?c:zalgoChar(c);
-        }).join('');
-      });
-      // hakuTxtも半分復元
-      var hakuRawText=
-        'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"\n\n'+
-        'しかし、本来は研修用の簡易システムだったものが\n'+
-        '想定外のエラー(404)により暴走\n\n'+
-        'システムから送られてきた謎の内定通知書を手に会場に来た参加者は\n'+
-        '"研修用のデータに実体ごと取り込まれた存在となってしまった"';
-      document.getElementById('hakuTxt').textContent=hakuRawText.split('').map(function(c){
-        return Math.random()<0.5?c:zalgoChar(c);
-      }).join('');
-    } else {
-      msg.textContent='NG: コードが違います';
-      window.x404();
-    }
- } else if(hakuRewardStep===1){
-    if(val==='新宿'){
-      msg.textContent='OK: 認証完了。復元しています…';
-      window.x404();
-      setTimeout(function(){
-        // 全テキストを元に戻す
-        document.body.classList.add('haku-mode');
-        nodes().forEach(function(n){
-          var orig=ORIG.get(n)||n.textContent;
-          n.textContent=orig.replace(/[\u0300-\u036f\u0483-\u0489\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g,'');
-        });
-        // navのzalgoも復元
-        document.querySelectorAll('.nav a span, .nav a').forEach(function(n){
-          n.textContent=n.textContent.replace(/[\u0300-\u036f\u0483-\u0489\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g,'');
-        });
-        document.getElementById('hakuTxt').textContent='';
-        // 赤白基調に切り替え
-        setTimeout(function(){
-          document.body.classList.remove('haku-mode');
-          document.body.classList.add('restored');
-          // ローディング画面表示
-          setTimeout(function(){
-            var rm=document.getElementById('restoreMsg');
-            rm.style.display='flex';
-            setTimeout(function(){rm.classList.add('on');},50);
-            // 2秒後にSHIFTサイトへ遷移
-            setTimeout(function(){
-              sessionStorage.setItem('room404_returned','1');
-              window.location.href='https://www.shiftinc.jp/company/principle/';
-            },5000);
-          },1200);
-        },800);
-      },900);
-    } else {
-      msg.textContent='NG: コードが違います';
-      window.x404();
-    }
-  }
-};
+// ---- revealOverlay ----
 function showReveal(){
-  window.closeEntry();
   var ov=document.getElementById('revealOverlay');
   ov.style.opacity='1';
   ov.style.pointerEvents='auto';
@@ -503,7 +367,7 @@ function showReveal(){
             ORIG.set(n,orig);
             n.textContent=zalgoStr(orig);
           });
-          document.querySelectorAll('.nav a span, .nav a').forEach(function(n){
+          document.querySelectorAll('#siteBody .nav a span, #siteBody .nav a').forEach(function(n){
             if(n.textContent.trim())n.textContent=zalgoStr(n.textContent);
           });
           var hakuRawText=
@@ -519,41 +383,52 @@ function showReveal(){
     },65);
   },6000);
 }
-window.checkReward=function(){
-  var val=(document.getElementById('rewardInput').value||'').trim();
-  var msg=document.getElementById('rewardMsg');
-  if(rewardStep===0){
+
+// ---- 報酬コード ----
+var hakuRewardStep=0;
+window.checkHakuReward=function(){
+  var val=(document.getElementById('hakuRewardInput').value||'').trim();
+  var msg=document.getElementById('hakuRewardMsg');
+  if(hakuRewardStep===0){
     if(val==='前半'){
-      rewardStep=1;
-      document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
-      document.getElementById('rewardInput').value='';
+      hakuRewardStep=1;
+      document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
+      document.getElementById('hakuRewardInput').value='';
       msg.textContent='OK: 前半コード認証';
+      var hakuEl=document.getElementById('hakuTop');
       nodes().forEach(function(n){
-        var inHaku=document.getElementById('hakuTop').contains(n);
-        if(!inHaku){
-          var base=remember(n);
-          var restored=base.split('').map(function(c){
-            return Math.random()<0.5?c:zalgoChar(c);
-          }).join('');
-          n.textContent=restored;
-        }
+        if(hakuEl.contains(n))return;
+        var orig=ORIG.get(n)||n.textContent;
+        n.textContent=orig.split('').map(function(c){return Math.random()<0.5?c:zalgoChar(c);}).join('');
       });
+      var hakuRawText=
+        'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"\n\n'+
+        'しかし、本来は研修用の簡易システムだったものが\n'+
+        '想定外のエラー(404)により暴走\n\n'+
+        'システムから送られてきた謎の内定通知書を手に会場に来た参加者は\n'+
+        '"研修用のデータに実体ごと取り込まれた存在となってしまった"';
+      document.getElementById('hakuTxt').textContent=hakuRawText.split('').map(function(c){return Math.random()<0.5?c:zalgoChar(c);}).join('');
     } else {
       msg.textContent='NG: コードが違います';
       window.x404();
     }
-  } else if(rewardStep===1){
+  } else if(hakuRewardStep===1){
     if(val==='新宿'){
-      msg.textContent='OK: 認証完了。遷移します…';
+      msg.textContent='OK: 認証完了。システムを復元しています…';
       window.x404();
       setTimeout(function(){
-        window.open('https://www.shiftinc.jp/company/philosophy/','_blank');
-        setTimeout(function(){
-          document.getElementById('revealOverlay').style.opacity='0';
-          document.getElementById('revealOverlay').style.pointerEvents='none';
-          var fin=document.getElementById('finalMsg');
-          fin.classList.add('on');
-        },1500);
+        document.body.classList.remove('haku-mode');
+        // 全テキストをzalgoなしに復元
+        nodes().forEach(function(n){
+          var orig=ORIG.get(n)||n.textContent;
+          n.textContent=orig.replace(/[\u0300-\u036f\u0483-\u0489\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g,'');
+        });
+        document.querySelectorAll('#siteBody .nav a span, #siteBody .nav a').forEach(function(n){
+          n.textContent=n.textContent.replace(/[\u0300-\u036f\u0483-\u0489\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g,'');
+        });
+        document.getElementById('hakuTop').style.display='none';
+        document.getElementById('hakuRewardMsg').textContent='';
+        window.scrollTo({top:0,behavior:'smooth'});
       },900);
     } else {
       msg.textContent='NG: コードが違います';
@@ -562,163 +437,5 @@ window.checkReward=function(){
   }
 };
 
-
-window.submitCheckin = function() {
-  // 1. 正常なメッセージを一瞬だけ出す
-  document.getElementById('checkinMsg2').textContent = '送信中... システムを照合しています。';
-
-  // 2. 0.5秒後に激しいバグ（グリッチ）を開始
-  setTimeout(function() {
-    // 画面全体を点滅・揺らすクラスを一時的に追加（globalGarbledを再利用）
-    document.body.classList.add('globalGarbled');
-    window.x404('CRITICAL_ERROR: DATA_CORRUPTION_DETECTED');
-
-    // 3. 1.5秒後に真っ暗なストーリー画面（showReveal）へ
-    setTimeout(function() {
-      document.body.classList.remove('globalGarbled');
-      showReveal();
-    }, 1500);
-  }, 500);
-
-  // データ送信（既存の処理）
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',
-    body:JSON.stringify({
-      '入室コード': savedEntryCode,
-      'Q1': document.getElementById('q1').value||'',
-      'Q2': document.getElementById('q2').value||'',
-      'Q3': document.getElementById('q3').value||'',
-      'Q4': document.getElementById('q4').value||'',
-      'Q5': document.getElementById('q5').value||''
-    }),
-    headers:{'Content-Type':'application/json'}}).catch(function(){});
-};
-window.skipCheckin=function(){
-  document.getElementById('checkinMsg2').textContent='OK: 記録しました（未入力）。';
-  window.x404();
-  setTimeout(showReveal, 900);
-};
-                    
-  window.skip=function(){document.getElementById('checkinMsg').textContent='OK: 記録しました（未入力）。復旧処理を開始します…';window.x404();var total=globalMojibake(2);
-    setTimeout(function(){document.getElementById('officialTop').scrollIntoView({behavior:'smooth',block:'start'});},520+total+200);
-  };
-
-  // Enter key (entry modal)
-  document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var a=document.activeElement;if(a&&a.id==='entryCode'){e.preventDefault();window.confirmEntry();}});
-if(sessionStorage.getItem('room404_returned')==='1'){
-  sessionStorage.removeItem('room404_returned');
-  document.body.classList.add('restored');
-  var retMsg=document.getElementById('restoreMsg');
-  retMsg.style.display='flex';
-  setTimeout(function(){retMsg.classList.add('on');},50);
-}
-
-  // initial light crypt (30%)
-  // 元テキストを先に全部記憶してからlightCrypt
-  setTimeout(function(){nodes().forEach(function(n){remember(n);});lightCrypt();},200);
-
-  // ---- tests ----
-  function assert(c,m){if(!c){console.error('[room404 test] FAIL:',m);throw new Error('Test failed: '+m);}console.log('[room404 test] OK:',m);}
-  function runTests(){assert(typeof window.x404==='function','x404 exists');assert(typeof window.goEntry==='function','goEntry exists');assert(typeof window.submitCheckin==='function','submitCheckin exists');window.goEntry();assert(m.classList.contains('on'),'modal opens');window.closeEntry();assert(!m.classList.contains('on'),'modal closes');var s='A\nB',o=keepStr(s,.2);assert((s.match(/\n/g)||[]).length===(o.match(/\n/g)||[]).length,'keepStr preserves newlines');console.log('[room404 test] All tests passed');}
-  try{var p=new URLSearchParams(location.search);if(p.get('test')==='1')runTests();}catch(e){}
 })();</script>
-
-<div id="revealOverlay">
-  <div class="bg"></div>
-  <div style="position:absolute;top:0;left:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;z-index:2;">
-  <span data-crypt style="font-weight:800;">room404</span>
-  <div>
-    <span data-crypt style="margin-left:26px;opacity:.7;">企業理念</span>
-    <span data-crypt style="margin-left:26px;opacity:.7;">事業内容</span>
-    <span data-crypt style="margin-left:26px;opacity:.7;">採用情報</span>
-    <span data-crypt style="margin-left:26px;opacity:.7;">お問い合わせ</span>
-  </div>
-</div>
-  <div class="txt" id="revealTxt">この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>しかし、本来は研修用の簡易システムだったものが<br>想定外のエラー(404)により暴走<br><br>システムから送られてきた謎の内定通知書を手に会場に来た参加者は<br>"研修用のデータに実体ごと取り込まれた存在となってしまった"</div>
-  <div id="rewardBox">
-    <div id="rewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;">報酬コード（1つめ）を入力</div>
-    <input id="rewardInput" type="text" placeholder="コードを入力" autocomplete="off">
-    <div class="btn p" onclick="checkReward()" style="display:inline-block;margin-top:10px;cursor:pointer;">決定</div>
-    <div class="rMsg" id="rewardMsg"></div>
-  </div>
-</div>
-  <div id="restoreMsg" style="display:none;">
-  <div style="position:relative;z-index:1;max-width:660px;padding:40px;text-align:center;font-size:17px;line-height:2.1;letter-spacing:.05em;color:#111;">
-    この仮想世界は「SHIFTで働く上で必要な"スキル"をデータとして可視化した世界」<br><br>
-    株式会社room404からSHIFTのクレドに行き着くことで、現実世界に帰ることができたようだ。<br><br>
-    気づくと現実の世界。謎の内定通知書も、謎の会社も人物もどうやらエラーによって引き起ったものだった。<br><br>
-    株式会社room404の存在は消えてしまったようだ。手元には、謎の内定通知書だけが残っている。
-  </div>
-</div>
-  
-  <div style="position:relative;z-index:1;width:100%;max-width:760px;padding:100px 20px 60px;text-align:left;">
-    <div style="font-size:11px;color:#e60012;letter-spacing:.15em;margin-bottom:12px;">SYSTEM RESTORE COMPLETE</div>
-    <h2 style="font-size:32px;font-weight:900;color:#111;line-height:1.4;margin-bottom:32px;">この世界から脱出したあなたたちは、<br>すでに<span style="color:#e60012;">"新人社員としての第一歩"</span>を踏み出している</h2>
-    <div style="border-left:4px solid #e60012;padding-left:20px;margin-bottom:32px;">
-      <p style="font-size:15px;color:#333;line-height:2;">
-        この仮想世界は「SHIFTで働く上で必要な"スキル"をデータとして可視化した世界」<br>
-        株式会社room404からSHIFTのクレドに行き着くことで、現実世界に帰ることができたようだ。<br><br>
-        気づくと現実の世界。謎の内定通知書も、謎の会社も人物もどうやらエラーによって引き起ったものだった。<br>
-        株式会社room404の存在は消えてしまったようだ。手元には、謎の内定通知書だけが残っている。
-      </p>
-    </div>
-    
-<div id="finalMsg" style="display:none;">
-  <div class="inner">この仮想世界は
-「SHIFTで働く上で必要な"スキル"をデータとして可視化した世界」
-株式会社room404からSHIFTのクレドに行き着くことで、現実世界に帰ることができたようだ。
-「この世界から脱出したあなたたちは、すでに"新人社員としての第一歩"を踏み出している」
-気づくと現実の世界。
-謎の内定通知書も、謎の会社も人物もどうやらエラーによって引き起ったものだった。
-株式会社room404の存在は消えてしまったようだ。
-手元には、謎の内定通知書だけが残っている</div>
-</div>
-
-<iframe id="gf-sender" name="gf-sender" style="display:none"></iframe>
-<iframe id="gf-sender2" name="gf-sender2" style="display:none"></iframe>
-<form id="gf-form" method="POST" target="gf-sender"
-  action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
-  style="display:none">
-  <input type="hidden" name="entry.493728132" id="gf-entry">
-</form>
-<form id="gf-form2" method="POST" target="gf-sender2"
-  action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
-  style="display:none">
-  <input type="hidden" name="entry.1862623267" id="gf-q1">
-  <input type="hidden" name="entry.589529654"  id="gf-q2">
-  <input type="hidden" name="entry.1340700598" id="gf-q3">
-  <input type="hidden" name="entry.675983686"  id="gf-q4">
-  <input type="hidden" name="entry.786925796"  id="gf-q5">
-</form>
-  <footer class="footer">
-  <div class="footerGrid">
-    <div>
-      <div class="footerLogo" data-crypt>株式会社room404</div>
-      <div class="small" data-crypt style="margin-top:10px;">
-        すべての才能を、データで価値に変える。
-      </div>
-    </div>
-
-    <div>
-      <div class="footerHead" data-crypt>Site Map</div>
-      <a onclick="glitchScroll('officialTop')"><span data-crypt>トップ</span></a>
-      <a onclick="glitchScroll('newsSection')"><span data-crypt>ニュース</span></a>
-      <a onclick="glitchScroll('servicesSection')"><span data-crypt>事業内容</span></a>
-      <a onclick="glitchScroll('companySection')"><span data-crypt>会社概要</span></a>
-      <a onclick="glitchScroll('recruitSection')"><span data-crypt>採用情報</span></a>
-      <a onclick="glitchScroll('accessSection')"><span data-crypt>アクセス</span></a>
-      <a onclick="goEntry()"><span data-crypt>お問い合わせ</span></a>
-    </div>
-
-    <div>
-      <div class="footerHead" data-crypt>Policy</div>
-      <a onclick="mini404ThenScroll('officialTop')"><span data-crypt>利用規約</span></a>
-      <a onclick="mini404ThenScroll('companySection')"><span data-crypt>プライバシーポリシー</span></a>
-      <a onclick="mini404ThenScroll('accessSection')"><span data-crypt>障害報告</span></a>
-    </div>
-  </div>
-
-  <div class="footerBottom small" data-crypt>
-    Copyright © room404 Inc. All Rights Reserved.
-  </div>
-</footer>
 </body></html>
