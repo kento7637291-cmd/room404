@@ -459,25 +459,22 @@ window.checkReward=function(){
   var val=(document.getElementById('rewardInput').value||'').trim();
   var msg=document.getElementById('rewardMsg');
   if(rewardStep===0){
-   if(val==='前半'){
-      hakuRewardStep=1;
-      document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
-      document.getElementById('hakuRewardInput').value='';
+    if(val==='前半'){
+      rewardStep=1;
+      document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
+      document.getElementById('rewardInput').value='';
       msg.textContent='OK: 前半コード認証';
-      // zalgo化された要素を50%だけ元のテキストに戻す
       nodes().forEach(function(n){
         var inHaku=document.getElementById('hakuTop').contains(n);
         if(!inHaku){
           var base=remember(n);
-          // 50%復元: 文字ごとにランダムでzalgoか元文字か
           var restored=base.split('').map(function(c){
             return Math.random()<0.5?c:zalgoChar(c);
           }).join('');
           n.textContent=restored;
         }
       });
-  });
-}else {
+    } else {
       msg.textContent='NG: コードが違います';
       window.x404();
     }
@@ -488,7 +485,8 @@ window.checkReward=function(){
       setTimeout(function(){
         window.open('https://www.shiftinc.jp/company/philosophy/','_blank');
         setTimeout(function(){
-          document.getElementById('revealOverlay').classList.remove('on');
+          document.getElementById('revealOverlay').style.opacity='0';
+          document.getElementById('revealOverlay').style.pointerEvents='none';
           var fin=document.getElementById('finalMsg');
           fin.classList.add('on');
         },1500);
@@ -544,7 +542,8 @@ window.skipCheckin=function(){
   document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var a=document.activeElement;if(a&&a.id==='entryCode'){e.preventDefault();window.confirmEntry();}});
 
   // initial light crypt (30%)
-  setTimeout(lightCrypt,200);
+  // 元テキストを先に全部記憶してからlightCrypt
+  setTimeout(function(){nodes().forEach(function(n){remember(n);});lightCrypt();},200);
 
   // ---- tests ----
   function assert(c,m){if(!c){console.error('[room404 test] FAIL:',m);throw new Error('Test failed: '+m);}console.log('[room404 test] OK:',m);}
