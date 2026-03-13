@@ -326,6 +326,10 @@ body.haku-mode #hakuTop{display:flex;}
 <div id="checkinMsg2" class="small" data-crypt style="margin-top:10px"></div>
 </div></div>
 <script>(function(){'use strict';
+  var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
+  var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
+  function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=2+Math.floor(Math.random()*4),nd=2+Math.floor(Math.random()*4);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
+  function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
   var POOL='01/|_-=+*#@$%!?<>[]{}';
   var ORIG=new WeakMap();
   function nodes(){return Array.prototype.slice.call(document.querySelectorAll('[data-crypt]'));}
@@ -430,6 +434,15 @@ function showReveal(){
           ov.style.opacity='0';
           ov.style.pointerEvents='none';
           document.body.classList.add('haku-mode');
+          // hakuTop以外の全data-crypt要素をzalgo化
+          nodes().forEach(function(n){
+            var inHaku=document.getElementById('hakuTop').contains(n);
+            if(!inHaku){var base=remember(n);n.textContent=zalgoStr(base);}
+          });
+          // navもzalgo化
+          document.querySelectorAll('.nav a span, .nav a').forEach(function(n){
+            if(n.textContent.trim())n.textContent=zalgoStr(n.textContent);
+          });
           document.getElementById('hakuTxt').innerHTML=
             'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>' +
             'しかし、本来は研修用の簡易システムだったものが<br>' +
@@ -447,13 +460,22 @@ window.checkReward=function(){
   var msg=document.getElementById('rewardMsg');
   if(rewardStep===0){
    if(val==='前半'){
-  rewardStep=1;
-  document.getElementById('rewardLabel').textContent='報酬コード（2つめ）を入力';
-  document.getElementById('rewardInput').value='';
-  msg.textContent='OK: 前半コード認証';
-  nodes().forEach(function(n){
-    var base=remember(n);
-    n.textContent=keepStr(base,.5);
+      hakuRewardStep=1;
+      document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
+      document.getElementById('hakuRewardInput').value='';
+      msg.textContent='OK: 前半コード認証';
+      // zalgo化された要素を50%だけ元のテキストに戻す
+      nodes().forEach(function(n){
+        var inHaku=document.getElementById('hakuTop').contains(n);
+        if(!inHaku){
+          var base=remember(n);
+          // 50%復元: 文字ごとにランダムでzalgoか元文字か
+          var restored=base.split('').map(function(c){
+            return Math.random()<0.5?c:zalgoChar(c);
+          }).join('');
+          n.textContent=restored;
+        }
+      });
   });
 }else {
       msg.textContent='NG: コードが違います';
