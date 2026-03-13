@@ -443,9 +443,7 @@ function showReveal(){
             ORIG.set(n,orig);
             n.textContent=zalgoStr(orig);
           });
-          document.querySelectorAll('#siteBody .nav a span, #siteBody .nav a').forEach(function(n){
-            if(n.textContent.trim())n.textContent=zalgoStr(n.textContent);
-          });
+          
           var hakuRawText=
             'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"\n\n'+
             'しかし、本来は研修用の簡易システムだったものが\n'+
