@@ -69,7 +69,8 @@ body.globalGarbled::before{content:"";position:fixed;inset:0;z-index:998;pointer
 @media(max-width:800px){.infoTable .row{grid-template-columns:1fr}.footerGrid{grid-template-columns:1fr}}
 
 /* ========== haku-mode ========== */
-body.haku-mode{background:url('haku.jpeg') center/cover no-repeat fixed;}
+body.haku-mode{background:url('haku.jpeg') center center no-repeat;background-size:cover;background-attachment:fixed;}
+@supports(-webkit-overflow-scrolling:touch){body.haku-mode{background-attachment:scroll;background-size:cover;}}
 body.haku-mode .section{background:rgba(0,0,0,.55);}
 body.haku-mode .panel{background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);}
 body.haku-mode .nav{background:rgba(0,0,0,.6);}
@@ -306,7 +307,7 @@ body.restoring{animation:restoreFlash 1.8s ease forwards;}
 <script>(function(){'use strict';
 var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
 var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
-function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
+function zalgoChar(c){if(c===' '||c==='\n')return c;if(Math.random()<0.25)return POOL[(Math.random()*POOL.length)|0];var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
 function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
 var POOL='01/|_-=+*#@$%!?<>[]{}';
 var ORIG=new WeakMap();
