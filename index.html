@@ -353,7 +353,7 @@ h1{font-size:28px;}
 <script>(function(){'use strict';
 var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
 var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
-function zalgoChar(c){if(c===' '||c==='\n')return c;if(Math.random()<0.25)return POOL[(Math.random()*POOL.length)|0];var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
+function zalgoChar(c){if(c===' '||c==='\n')return c;if(Math.random()<0.4)return POOL[(Math.random()*POOL.length)|0];var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
 function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
 var POOL='01/|_-=+*#@$%!?<>[]{}';
 var ORIG=new WeakMap();
