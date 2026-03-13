@@ -131,28 +131,27 @@
   .infoTable .row{grid-template-columns:1fr}
   .footerGrid{grid-template-columns:1fr}
 }
-  
+  body.haku-mode{background:url('haku.jpeg') center/cover no-repeat fixed;}
+body.haku-mode .section{background:rgba(0,0,0,.55);}
+body.haku-mode .panel{background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);}
+body.haku-mode .nav{background:rgba(0,0,0,.6);}
+body.haku-mode .infoTable{background:rgba(0,0,0,.4);}
+body.haku-mode .infoTable .label{background:rgba(0,0,0,.3);}
+body.haku-mode .fakeMap{background:rgba(0,0,0,.4);}
+#hakuTop{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:40px;text-align:center;}
+body.haku-mode #hakuTop{display:flex;}
 </style></head><body>
 
-<section id="pptSplash">
-  <div style="position:absolute;inset:0;background:url('haku.jpeg') center/cover no-repeat;opacity:.55;z-index:0;"></div>
-  <div style="position:relative;z-index:1;max-width:700px;padding:40px;text-align:center;">
-    <div id="splashTxt" style="font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);">
-      この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>
-      しかし、本来は研修用の簡易システムだったものが<br>
-      想定外のエラー(404)により暴走<br><br>
-      システムから送られてきた謎の内定通知書を手に会場に来た参加者は<br>
-      "研修用のデータに実体ごと取り込まれた存在となってしまった"
-    </div>
-    <div id="splashRewardBox" style="margin-top:32px;text-align:center;">
-      <div id="splashRewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;color:#fff;">報酬コード（1つめ）を入力</div>
-      <input id="splashRewardInput" type="text" placeholder="コードを入力" autocomplete="off" style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;">
-      <div onclick="checkSplashReward()" style="display:inline-block;margin-top:10px;cursor:pointer;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(20,99,255,.25);color:#fff;font-weight:800;">決定</div>
-      <div id="splashRewardMsg" style="font-size:12px;opacity:.7;margin-top:8px;min-height:18px;color:#fff;"></div>
-    </div>
+<section id="pptSplash" style="display:none;"></section>
+<div id="hakuTop">
+  <div id="hakuTxt" style="max-width:700px;font-size:18px;line-height:2;letter-spacing:.05em;color:#fff;text-shadow:0 0 20px rgba(0,200,255,.8);text-align:center;"></div>
+  <div style="margin-top:32px;text-align:center;">
+    <div id="hakuRewardLabel" style="font-size:14px;opacity:.8;margin-bottom:8px;color:#fff;">報酬コード（1つめ）を入力</div>
+    <input id="hakuRewardInput" type="text" placeholder="コードを入力" autocomplete="off" style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;">
+    <div onclick="checkHakuReward()" style="display:inline-block;margin-top:10px;cursor:pointer;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(20,99,255,.25);color:#fff;font-weight:800;">決定</div>
+    <div id="hakuRewardMsg" style="font-size:12px;opacity:.7;margin-top:8px;min-height:18px;color:#fff;"></div>
   </div>
-  <div class="scrollGuide">SCROLL</div>
-</section>
+</div>
 
 <div class="nav">
   <div><a onclick="glitchScroll('officialTop')"><span data-crypt>room404</span></a></div>
@@ -336,7 +335,6 @@
   function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
   // ---- splash image (embedded) ----
-  document.getElementById('splashImg').src='hero.jpg';
 
   // ---- 404 overlay (duration 900ms = 3/4) ----
   window.x404=function(msg){msg=msg||'404 Not Found...';var f=document.getElementById('fake404');var span=f.querySelector('[data-crypt]')||f;f.classList.add('active');var stop=startGarbled(span,msg);setTimeout(function(){stop();f.classList.remove('active');},900);};
@@ -379,22 +377,22 @@ window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK:
   function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
 
 var rewardStep=0;
-var splashRewardStep=0;
-window.checkSplashReward=function(){
-  var val=(document.getElementById('splashRewardInput').value||'').trim();
-  var msg=document.getElementById('splashRewardMsg');
-  if(splashRewardStep===0){
+var hakuRewardStep=0;
+window.checkHakuReward=function(){
+  var val=(document.getElementById('hakuRewardInput').value||'').trim();
+  var msg=document.getElementById('hakuRewardMsg');
+  if(hakuRewardStep===0){
     if(val==='前半'){
-      splashRewardStep=1;
-      document.getElementById('splashRewardLabel').textContent='報酬コード（2つめ）を入力';
-      document.getElementById('splashRewardInput').value='';
+      hakuRewardStep=1;
+      document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
+      document.getElementById('hakuRewardInput').value='';
       msg.textContent='OK: 前半コード認証';
       nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.5);});
     } else {
       msg.textContent='NG: コードが違います';
       window.x404();
     }
-  } else if(splashRewardStep===1){
+  } else if(hakuRewardStep===1){
     if(val==='新宿'){
       msg.textContent='OK: 認証完了。遷移します…';
       window.x404();
@@ -414,7 +412,6 @@ window.checkSplashReward=function(){
 function showReveal(){
   window.closeEntry();
   var ov=document.getElementById('revealOverlay');
-  // グリッチアニメーションで出現
   ov.style.opacity='1';
   ov.style.pointerEvents='auto';
   ov.classList.add('glitching');
@@ -428,8 +425,19 @@ function showReveal(){
       txt.textContent=keepStr(base,1-keep);
       if(keep>=1.0){
         clearInterval(id);
-        txt.textContent=keepStr(base,0);
-        document.getElementById('rewardBox').style.display='block';
+        // revealOverlayを閉じてhaku-modeへ移行
+        setTimeout(function(){
+          ov.style.opacity='0';
+          ov.style.pointerEvents='none';
+          document.body.classList.add('haku-mode');
+          document.getElementById('hakuTxt').innerHTML=
+            'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"<br><br>' +
+            'しかし、本来は研修用の簡易システムだったものが<br>' +
+            '想定外のエラー(404)により暴走<br><br>' +
+            'システムから送られてきた謎の内定通知書を手に会場に来た参加者は<br>' +
+            '"研修用のデータに実体ごと取り込まれた存在となってしまった"';
+          window.scrollTo({top:0,behavior:'smooth'});
+        },800);
       }
     },65);
   },6000);
