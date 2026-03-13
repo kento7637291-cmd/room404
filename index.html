@@ -328,13 +328,14 @@ body.haku-mode #hakuTop{display:flex;}
 <script>(function(){'use strict';
   var ZALGO_UP=['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̒','̓','̔','̽','̉','ͅ','͍','͎','͓','͔','͕','͖','͙','͚','̣','̤','̥','̦','̧','̨','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ'];
   var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚'];
-  function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=2+Math.floor(Math.random()*4),nd=2+Math.floor(Math.random()*4);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
+ function zalgoChar(c){if(c===' '||c==='\n')return c;var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
   function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
   var POOL='01/|_-=+*#@$%!?<>[]{}';
   var ORIG=new WeakMap();
   function nodes(){return Array.prototype.slice.call(document.querySelectorAll('[data-crypt]'));}
   function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c==='\n'||c===' ')o+=c;else o+=(Math.random()<k?c:POOL[(Math.random()*POOL.length)|0]);}return o;}
   function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
+  function forceRemember(n,v){ORIG.set(n,v);}
   function lightCrypt(){nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.7);});}
   function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
@@ -378,7 +379,7 @@ window.confirmEntry=function(){var v=(document.getElementById('entryCode').value
 window.skipEntry=function(){document.getElementById('entryMsg').textContent='OK: 入室しました（未入力）';sendEntryCode('');lightCrypt();window.x404('404 Not Found... (redirecting)');setTimeout(toCheckin,520);};
 
   // ---- global mojibake (text only) ----
-  function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
+  function globalMojibake(scale){scale=(typeof scale==='number'&&scale>0)?scale:2;var nodeMs=Math.round(1200*scale), bodyMs=Math.round(1600*scale);document.body.classList.add('globalGarbled');nodes().forEach(function(n){if(document.body.classList.contains('haku-mode'))return;var base=remember(n);var t=0;var id=setInterval(function(){t++;n.textContent=keepStr(base,Math.min(.85,.1+t*.08));},65);setTimeout(function(){clearInterval(id);if(!document.body.classList.contains('haku-mode'))n.textContent=base;},nodeMs);});setTimeout(function(){document.body.classList.remove('globalGarbled');},bodyMs);return bodyMs;}
 
 var rewardStep=0;
 var hakuRewardStep=0;
@@ -391,7 +392,14 @@ window.checkHakuReward=function(){
       document.getElementById('hakuRewardLabel').textContent='報酬コード（2つめ）を入力';
       document.getElementById('hakuRewardInput').value='';
       msg.textContent='OK: 前半コード認証';
-      nodes().forEach(function(n){var base=remember(n);n.textContent=keepStr(base,.5);});
+      var hakuEl=document.getElementById('hakuTop');
+      nodes().forEach(function(n){
+        if(hakuEl.contains(n))return;
+        var base=remember(n);
+        n.textContent=base.split('').map(function(c){
+          return Math.random()<0.5?c:zalgoChar(c);
+        }).join('');
+      });
     } else {
       msg.textContent='NG: コードが違います';
       window.x404();
@@ -435,9 +443,13 @@ function showReveal(){
           ov.style.pointerEvents='none';
           document.body.classList.add('haku-mode');
           // hakuTop以外の全data-crypt要素をzalgo化
+         var hakuEl=document.getElementById('hakuTop');
           nodes().forEach(function(n){
-            var inHaku=document.getElementById('hakuTop').contains(n);
-            if(!inHaku){var base=remember(n);n.textContent=zalgoStr(base);}
+            if(hakuEl.contains(n))return;
+            var base=remember(n);
+            var z=zalgoStr(base);
+            n.textContent=z;
+            ORIG.set(n,base); // zalgo後も元テキストを保持（復元用）
           });
           // navもzalgo化
           document.querySelectorAll('.nav a span, .nav a').forEach(function(n){
