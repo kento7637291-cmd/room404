@@ -6,6 +6,11 @@
 #rewardBox{margin-top:32px;display:none;text-align:center;position:relative;z-index:10;}
 #rewardBox input{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;padding:10px 14px;outline:none;width:220px;text-align:center;position:relative;z-index:10;}
 #rewardBox .rMsg{font-size:12px;opacity:.7;margin-top:8px;min-height:18px;}
+<div id="restoreMsg">
+  <div class="restore-logo">SHIFT</div>
+  <div class="restore-text">画面が遷移します。その後またこのサイトに戻ってきてください。</div>
+  <div class="loader"></div>
+</div>
 #finalMsg{position:fixed;inset:0;z-index:700;display:flex;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;transition:opacity 3s ease;padding:40px;}
 #finalMsg.on{opacity:1;pointer-events:auto;}
 #finalMsg .inner{max-width:660px;font-size:17px;line-height:2.1;text-align:center;letter-spacing:.05em;white-space:pre-wrap;}
@@ -140,6 +145,22 @@ body.haku-mode .infoTable .label{background:rgba(0,0,0,.3);}
 body.haku-mode .fakeMap{background:rgba(0,0,0,.4);}
 #hakuTop{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:40px;text-align:center;}
 body.haku-mode #hakuTop{display:flex;}
+body.restored{background:#fff;color:#111;transition:background 1.2s ease,color 1.2s ease;}
+body.restored .section{background:#fff;}
+body.restored .nav{background:rgba(255,255,255,.95);color:#111;}
+body.restored .nav a{color:#111;}
+body.restored .panel{background:#f5f5f5;border-color:#ddd;color:#111;}
+body.restored .infoTable{background:#f5f5f5;}
+body.restored .infoTable .label{background:#eee;color:#111;}
+body.restored .fakeMap{background:#f0f0f0;}
+body.restored .footer{background:#f5f5f5;border-color:#ddd;color:#111;}
+body.restored h1,body.restored p,body.restored div,body.restored span{color:#111;}
+#restoreMsg{position:fixed;inset:0;z-index:800;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;opacity:0;pointer-events:none;transition:opacity 1s ease;}
+#restoreMsg.on{opacity:1;pointer-events:auto;}
+#restoreMsg .restore-logo{font-size:48px;font-weight:900;color:#e60012;letter-spacing:.05em;margin-bottom:32px;}
+#restoreMsg .restore-text{font-size:18px;color:#111;letter-spacing:.08em;margin-bottom:40px;}
+#restoreMsg .loader{width:48px;height:48px;border:4px solid #ddd;border-top:4px solid #e60012;border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style></head><body>
 
 <section id="pptSplash" style="display:none;"></section>
@@ -395,25 +416,51 @@ window.checkHakuReward=function(){
       var hakuEl=document.getElementById('hakuTop');
       nodes().forEach(function(n){
         if(hakuEl.contains(n))return;
-        var base=remember(n);
-        n.textContent=base.split('').map(function(c){
+        var orig=ORIG.get(n)||n.textContent;
+        n.textContent=orig.split('').map(function(c){
           return Math.random()<0.5?c:zalgoChar(c);
         }).join('');
       });
+      // hakuTxtも半分復元
+      var hakuRawText=
+        'この世界は "SHIFTで働く上で必要な"スキル"をデータとして可視化した世界"\n\n'+
+        'しかし、本来は研修用の簡易システムだったものが\n'+
+        '想定外のエラー(404)により暴走\n\n'+
+        'システムから送られてきた謎の内定通知書を手に会場に来た参加者は\n'+
+        '"研修用のデータに実体ごと取り込まれた存在となってしまった"';
+      document.getElementById('hakuTxt').textContent=hakuRawText.split('').map(function(c){
+        return Math.random()<0.5?c:zalgoChar(c);
+      }).join('');
     } else {
       msg.textContent='NG: コードが違います';
       window.x404();
     }
-  } else if(hakuRewardStep===1){
+ } else if(hakuRewardStep===1){
     if(val==='新宿'){
-      msg.textContent='OK: 認証完了。遷移します…';
+      msg.textContent='OK: 認証完了。復元しています…';
       window.x404();
       setTimeout(function(){
-        window.open('https://www.shiftinc.jp/company/philosophy/','_blank');
+        // 全テキストを元に戻す
+        document.body.classList.add('haku-mode');
+        nodes().forEach(function(n){
+          var orig=ORIG.get(n)||n.textContent;
+          n.textContent=orig;
+        });
+        document.getElementById('hakuTxt').textContent='';
+        // 赤白基調に切り替え
         setTimeout(function(){
-          var fin=document.getElementById('finalMsg');
-          fin.classList.add('on');
-        },1500);
+          document.body.classList.remove('haku-mode');
+          document.body.classList.add('restored');
+          // ローディング画面表示
+          setTimeout(function(){
+            var rm=document.getElementById('restoreMsg');
+            rm.classList.add('on');
+            // 2秒後にSHIFTサイトへ遷移
+            setTimeout(function(){
+              window.location.href='https://www.shiftinc.jp/company/philosophy/';
+            },2000);
+          },1200);
+        },800);
       },900);
     } else {
       msg.textContent='NG: コードが違います';
