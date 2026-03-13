@@ -137,6 +137,31 @@ animation-delay:0.3s;
   90%{opacity:1;}
   100%{transform:translateY(-150vh);opacity:0;}
 }
+#escapeSuccess{
+  position:fixed;inset:0;z-index:1001;
+  background:#000;display:none;
+  align-items:center;justify-content:center;
+}
+#escapeSuccess.on{display:flex;}
+#escapeSuccessText{
+  font-size:32px;font-weight:900;letter-spacing:.2em;color:#fff;
+  opacity:0;transition:opacity 2s ease;
+  text-align:center;line-height:2;
+}
+#escapeSuccess.on #escapeSuccessText{opacity:1;}
+@media(max-width:600px){
+h1{font-size:28px;}
+.nav{padding:12px 5%;}
+.nav a{margin-left:12px;font-size:13px;}
+.section{padding:12px 5% 24px;}
+.footer{padding:40px 5% 20px;}
+.footerGrid{grid-template-columns:1fr;}
+#surveyScreen .survey-head{font-size:20px;}
+#revealOverlay .txt{font-size:15px;padding:24px;}
+#hakuTxt{font-size:15px !important;}
+#endingText{font-size:14px;padding:20px;}
+#escapeSuccessText{font-size:24px;}
+}
 </style>
 </head><body>
 
@@ -510,6 +535,15 @@ window.showEnding=function(){
   document.getElementById('escapeBtn').style.display='none';
   var el=document.getElementById('ending');
   el.classList.add('on');
+  // 16秒後（ロール終了後）に脱出成功を表示
+  setTimeout(function(){
+    el.classList.remove('on');
+    var s=document.getElementById('escapeSuccess');
+    s.classList.add('on');
+    setTimeout(function(){
+      document.getElementById('escapeSuccessText').style.opacity='1';
+    },100);
+  },17000);
 };
 })();</script>
 
@@ -545,5 +579,7 @@ SHIFTは、もう“次の業務”を用意しているのかもしれない。
     その答えを知るのは、これからこの会社で働く、あなた自身だ。
   </div>
 </div>
-
+<div id="escapeSuccess">
+  <div id="escapeSuccessText">脱出成功</div>
+</div>
 </body></html>
