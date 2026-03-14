@@ -391,25 +391,21 @@ window.submitSurvey=function(){
   var msg=document.getElementById('surveyMsg');
   btn.disabled=true;
   msg.textContent='送信中... システムを照合しています。';
-  var params=new URLSearchParams();
-  document.getElementById('gf-entry').value=(document.getElementById('entryCode').value||'').trim();
-  document.getElementById('gf-q1').value=document.getElementById('q1').value||'';
-  document.getElementById('gf-q2').value=document.getElementById('q2').value||'';
-  document.getElementById('gf-q3').value=document.getElementById('q3').value||'';
-  document.getElementById('gf-q4').value=document.getElementById('q4').value||'';
-  document.getElementById('gf-q5').value=document.getElementById('q5').value||'';
-  document.getElementById('gf-q6').value=document.getElementById('q6').value||'';
-  document.getElementById('gf-q7').value=document.getElementById('q7').value||'';
-  document.getElementById('gf-q8').value=document.getElementById('q8').value||'';
-  document.getElementById('gf-q9').value=document.getElementById('q9').value||'';
-  document.getElementById('gf-q10').value=document.getElementById('q10').value||'';
-  document.getElementById('gf-form').submit();
-  fetch('https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse',{
-    method:'POST',mode:'no-cors',body:params
-  }).catch(function(){});
-  
+  var data={
+    'entry.493728132':(document.getElementById('entryCode').value||'').trim(),
+    'entry.551312311':document.getElementById('q1').value||'',
+    'entry.1862623267':document.getElementById('q2').value||'',
+    'entry.589529654':document.getElementById('q3').value||'',
+    'entry.1340700598':document.getElementById('q4').value||'',
+    'entry.675983686':document.getElementById('q5').value||'',
+    'entry.786925796':document.getElementById('q6').value||'',
+    'entry.1416361258':document.getElementById('q7').value||'',
+    'entry.1118071384':document.getElementById('q8').value||'',
+    'entry.290472344':document.getElementById('q9').value||'',
+    'entry.823216201':document.getElementById('q10').value||''
+  };
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(function(){
-    // アンケート画面をフェードアウトして次の画面へ
     document.getElementById('surveyScreen').style.transition='opacity .8s ease';
     document.getElementById('surveyScreen').style.opacity='0';
     setTimeout(function(){
