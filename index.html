@@ -383,7 +383,7 @@ function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c===
 function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
 function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
-var GAS_URL='https://script.google.com/macros/s/AKfycbxGw5tZsditjMxEj-9lgT56lWOK2AnkYnnzrnFKT-r6g5nopFwtEjqi22lG1rxIq9_f1w/exec';
+var GAS_URL='https://script.google.com/macros/s/AKfycbxDVjV-AcP7qRCvDqetbha3Z8Zl3kj9_28oFbOLPAdZe3M6mf4CtXLBbAyT0h0XPvQrGw/exec';
 
 // ---- アンケート送信 ----
 window.submitSurvey=function(){
