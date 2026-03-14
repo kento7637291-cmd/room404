@@ -377,7 +377,6 @@ var ZALGO_DOWN=['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩'
 var POOL='01/|_-=+*#@$%!?<>[]{}';
 function zalgoChar(c){if(c===' '||c==='\n')return c;if(Math.random()<0.4)return POOL[(Math.random()*POOL.length)|0];var r=c;var nu=6+Math.floor(Math.random()*10),nd=6+Math.floor(Math.random()*10);for(var i=0;i<nu;i++)r+=ZALGO_UP[Math.floor(Math.random()*ZALGO_UP.length)];for(var j=0;j<nd;j++)r+=ZALGO_DOWN[Math.floor(Math.random()*ZALGO_DOWN.length)];return r;}
 function zalgoStr(s){return s.split('').map(zalgoChar).join('');}
-var POOL='01/|_-=+*#@$%!?<>[]{}';
 var ORIG=new WeakMap();
 function nodes(){return Array.prototype.slice.call(document.querySelectorAll('#siteBody [data-crypt]'));}
 function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c==='\n'||c===' ')o+=c;else o+=(Math.random()<k?c:POOL[(Math.random()*POOL.length)|0]);}return o;}
