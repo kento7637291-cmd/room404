@@ -383,7 +383,7 @@ function keepStr(t,k){var o='',i,c;for(i=0;i<t.length;i++){c=t.charAt(i);if(c===
 function remember(n){if(!ORIG.has(n))ORIG.set(n,n.textContent);return ORIG.get(n)||'';}
 function startGarbled(el,base){var keep=.15;var id=setInterval(function(){keep=Math.min(.85,keep+.07);el.textContent=keepStr(base,keep);},70);return function(){clearInterval(id);el.textContent=base;};}
 
-var GAS_URL='https://script.google.com/macros/s/AKfycbxDVjV-AcP7qRCvDqetbha3Z8Zl3kj9_28oFbOLPAdZe3M6mf4CtXLBbAyT0h0XPvQrGw/exec';
+var GAS_URL='https://script.google.com/macros/s/AKfycbzVXzLuAuTpgrFTsiCBvrso9CKgN_lQzfv7zMguOO3xCNS770HYu-rVj4sIrD-_9dFo/exec';
 
 // ---- アンケート送信 ----
 window.submitSurvey=function(){
@@ -392,17 +392,17 @@ window.submitSurvey=function(){
   btn.disabled=true;
   msg.textContent='送信中... システムを照合しています。';
   var data={
-    'entry.493728132':(document.getElementById('entryCode').value||'').trim(),
-    'entry.551312311':document.getElementById('q1').value||'',
-    'entry.1862623267':document.getElementById('q2').value||'',
-    'entry.589529654':document.getElementById('q3').value||'',
-    'entry.1340700598':document.getElementById('q4').value||'',
-    'entry.675983686':document.getElementById('q5').value||'',
-    'entry.786925796':document.getElementById('q6').value||'',
-    'entry.1416361258':document.getElementById('q7').value||'',
-    'entry.1118071384':document.getElementById('q8').value||'',
-    'entry.290472344':document.getElementById('q9').value||'',
-    'entry.823216201':document.getElementById('q10').value||''
+    'entry.1065679179':(document.getElementById('entryCode').value||'').trim(),
+    'entry.495043263':document.getElementById('q1').value||'',
+    'entry.1917381028':document.getElementById('q2').value||'',
+    'entry.1536224958':document.getElementById('q3').value||'',
+    'entry.1567006370':document.getElementById('q4').value||'',
+    'entry.903096638':document.getElementById('q5').value||'',
+    'entry.781937083':document.getElementById('q6').value||'',
+    'entry.1094887670':document.getElementById('q7').value||'',
+    'entry.662837745':document.getElementById('q8').value||'',
+    'entry.1455457602':document.getElementById('q9').value||'',
+    'entry.662474440':document.getElementById('q10').value||''
   };
   fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(function(){
