@@ -174,7 +174,7 @@ h1{font-size:28px;}
 
     <div class="sv-block">
       <div class="sv-label">入室コード（任意）</div>
-      <input id="entryCode" class="sv-input" type="text" placeholder="例）room404 / kento2026" autocomplete="off">
+      <input id="entryCode" class="sv-input" type="text" placeholder="例）わたがし / " autocomplete="off">
     </div>
     <div class="sv-block">
       <div class="sv-label">Q1. 現時点で、Excelに対してどの程度苦手意識や心理的ハードルがありますか。<br>1 = まったくない　10 = とても強い</div>
@@ -209,11 +209,11 @@ h1{font-size:28px;}
       <select id="q8" class="sv-input"><option value="" selected>選択してください</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
     </div>
     <div class="sv-block">
-      <div class="sv-label">Q9. 現時点で、入社前準備に関して特に不安に感じていることがあれば教えてください。</div>
+      <div class="sv-label">Q9. 現時点で、入社前準備に関して特に不安に感じていることがあれば教えてください。（任意）</div>
       <textarea id="q9" class="sv-input" rows="3" placeholder="自由に記入してください" style="resize:vertical;"></textarea>
     </div>
     <div class="sv-block">
-      <div class="sv-label">Q10. この企画を通じて、特に得たいものがあれば教えてください。<br>例：同期との交流、学習のきっかけ、研修内容の理解、楽しさ など</div>
+      <div class="sv-label">Q10. この企画を通じて、特に得たいものがあれば教えてください。（任意）<br>例：同期との交流、学習のきっかけ、研修内容の理解、楽しさ など</div>
       <textarea id="q10" class="sv-input" rows="3" placeholder="自由に記入してください" style="resize:vertical;"></textarea>
     </div>
 
@@ -391,19 +391,18 @@ window.submitSurvey=function(){
   var msg=document.getElementById('surveyMsg');
   btn.disabled=true;
   msg.textContent='送信中... システムを照合しています。';
-  var data={
-    '入室コード':(document.getElementById('entryCode').value||'').trim(),
-    'Q1':document.getElementById('q1').value||'',
-    'Q2':document.getElementById('q2').value||'',
-    'Q3':document.getElementById('q3').value||'',
-    'Q4':document.getElementById('q4').value||'',
-    'Q5':document.getElementById('q5').value||'',
-    'Q6':document.getElementById('q6').value||'',
-    'Q7':document.getElementById('q7').value||'',
-    'Q8':document.getElementById('q8').value||'',
-    'Q9':document.getElementById('q9').value||'',
-    'Q10':document.getElementById('q10').value||''
-  };
+  var params=new URLSearchParams();
+  params.append('entry.551312311', (document.getElementById('entryCode').value||'').trim());
+  params.append('entry.1862623267', document.getElementById('q1').value||'');
+  params.append('entry.589529654', document.getElementById('q2').value||'');
+  params.append('entry.1340700598', document.getElementById('q3').value||'');
+  params.append('entry.675983686', document.getElementById('q4').value||'');
+  params.append('entry.786925796', document.getElementById('q5').value||'');
+  params.append('entry.1416361258', document.getElementById('q6').value||'');
+  params.append('entry.1118071384', document.getElementById('q7').value||'');
+  fetch('https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse',{
+    method:'POST',mode:'no-cors',body:params
+  }).catch(function(){});
   fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}}).catch(function(){});
   setTimeout(function(){
     // アンケート画面をフェードアウトして次の画面へ
