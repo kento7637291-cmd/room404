@@ -392,17 +392,18 @@ window.submitSurvey=function(){
   btn.disabled=true;
   msg.textContent='送信中... システムを照合しています。';
   var params=new URLSearchParams();
-  params.append('entry.493728132', (document.getElementById('entryCode').value||'').trim());
-  params.append('entry.551312311', document.getElementById('q1').value||'');
-  params.append('entry.1862623267', document.getElementById('q2').value||'');
-  params.append('entry.589529654', document.getElementById('q3').value||'');
-  params.append('entry.1340700598', document.getElementById('q4').value||'');
-  params.append('entry.675983686', document.getElementById('q5').value||'');
-  params.append('entry.786925796', document.getElementById('q6').value||'');
-  params.append('entry.1416361258', document.getElementById('q7').value||'');
-  params.append('entry.1118071384', document.getElementById('q8').value||'');
-  params.append('entry.290472344', document.getElementById('q9').value||'');
-  params.append('entry.823216201', document.getElementById('q10').value||'');
+  document.getElementById('gf-entry').value=(document.getElementById('entryCode').value||'').trim();
+  document.getElementById('gf-q1').value=document.getElementById('q1').value||'';
+  document.getElementById('gf-q2').value=document.getElementById('q2').value||'';
+  document.getElementById('gf-q3').value=document.getElementById('q3').value||'';
+  document.getElementById('gf-q4').value=document.getElementById('q4').value||'';
+  document.getElementById('gf-q5').value=document.getElementById('q5').value||'';
+  document.getElementById('gf-q6').value=document.getElementById('q6').value||'';
+  document.getElementById('gf-q7').value=document.getElementById('q7').value||'';
+  document.getElementById('gf-q8').value=document.getElementById('q8').value||'';
+  document.getElementById('gf-q9').value=document.getElementById('q9').value||'';
+  document.getElementById('gf-q10').value=document.getElementById('q10').value||'';
+  document.getElementById('gf-form').submit();
   fetch('https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse',{
     method:'POST',mode:'no-cors',body:params
   }).catch(function(){});
@@ -599,4 +600,20 @@ window.showEnding=function(){
 <div id="escapeSuccess">
   <div id="escapeSuccessText">脱出成功</div>
 </div>
+  <iframe id="gf-sender" name="gf-sender" style="display:none"></iframe>
+<form id="gf-form" method="POST" target="gf-sender"
+  action="https://docs.google.com/forms/d/1e7fWPVFoajQYfwfNpLerNuSWdiJeHGDP7BhOp-BQofw/formResponse"
+  style="display:none">
+  <input type="hidden" name="entry.493728132" id="gf-entry">
+  <input type="hidden" name="entry.551312311" id="gf-q1">
+  <input type="hidden" name="entry.1862623267" id="gf-q2">
+  <input type="hidden" name="entry.589529654" id="gf-q3">
+  <input type="hidden" name="entry.1340700598" id="gf-q4">
+  <input type="hidden" name="entry.675983686" id="gf-q5">
+  <input type="hidden" name="entry.786925796" id="gf-q6">
+  <input type="hidden" name="entry.1416361258" id="gf-q7">
+  <input type="hidden" name="entry.1118071384" id="gf-q8">
+  <input type="hidden" name="entry.290472344" id="gf-q9">
+  <input type="hidden" name="entry.823216201" id="gf-q10">
+</form>
 </body></html>
