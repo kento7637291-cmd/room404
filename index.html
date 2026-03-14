@@ -173,8 +173,15 @@ h1{font-size:28px;}
     <h2 class="survey-head">接続認証を開始します。<br><span>データを入力してください。</span></h2>
 
     <div class="sv-block">
-      <div class="sv-label">入室コード（任意）</div>
-      <input id="entryCode" class="sv-input" type="text" placeholder="例）わたがし / " autocomplete="off">
+      <div class="sv-block">
+      <div class="sv-label" style="opacity:1;font-size:13px;line-height:1.9;">
+        あなたの"入室コード"です。イベント当日と脱出後アンケートであなたが考えた任意のコードを入力してもらい、変化を比較します（※個人特定はしません）。<br><br>
+        〜3つの約束〜<br>
+        1. 個人が特定できる情報はNG<br>
+        2. 脱出後も同じコードを入力しますので、スクリーンショットなどで保存してください。<br>
+        3.「あいうえ」など簡単すぎるコードはご遠慮ください。
+      </div>
+      <input id="entryCode" class="sv-input" type="text" placeholder="入室コードを入力してください" autocomplete="off" required>
     </div>
     <div class="sv-block">
       <div class="sv-label">Q1. 現時点で、Excelに対してどの程度苦手意識や心理的ハードルがありますか。<br>1 = まったくない　10 = とても強い</div>
@@ -389,6 +396,11 @@ var GAS_URL='https://script.google.com/macros/s/AKfycbzVXzLuAuTpgrFTsiCBvrso9CKg
 window.submitSurvey=function(){
   var btn=document.getElementById('submitSurveyBtn');
   var msg=document.getElementById('surveyMsg');
+  var entryVal=(document.getElementById('entryCode').value||'').trim();
+  if(!entryVal){
+    document.getElementById('surveyMsg').textContent='入室コードを入力してください。';
+    return;
+  }
   btn.disabled=true;
   msg.textContent='送信中... システムを照合しています。';
   var data={
