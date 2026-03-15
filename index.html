@@ -422,10 +422,7 @@ window.submitSurvey=function(){
     document.getElementById('surveyScreen').style.opacity='0';
     setTimeout(function(){
       document.getElementById('surveyScreen').style.display='none';
-      var ws=document.getElementById('waitScreen');
-      ws.style.display='flex';
-      ws.style.position='fixed';
-      ws.style.zIndex='900';
+      document.getElementById('waitScreen').style.display='flex';
     },800);
   },1200);
 };
@@ -596,18 +593,17 @@ window.showEnding=function(){
 <div id="ending">
   <div id="endingText">
     気が付くと、
-    <br><br>
+    <br>さっきまでいたはずの、
     <br>あの異様なオフィスも、
     <br>上司も、与えられた業務も、
-    <br><br>すべて跡形もなく消えていた。
-    <br><br><br><br>誰もいない、
-    <br><br>内定式会場に
-    <br>ただ1人。
-    <br><br>手元に残った​
-    <br><br>株式会社room404 内定通知書​
-    <br><br><br><br>[404]​
-    <br><br>見覚えのある数字。
-    <br><br>つまり、あの会社は…
+    <br><br>すべて跡形もなく消えており、
+    <br>誰もいない
+    <br><br>SHIFTの内定式会場に
+    <br>ただ一人立っていた。
+    <br><br>そのとき、一枚の紙が目に入る
+    <br><br>――株式会社ROOM404　内定通知書
+    <br><br>404、見覚えのある数字だ
+    <br><br><br>つまり、あの会社は――
   </div>
 </div>
 <div id="escapeSuccess">
