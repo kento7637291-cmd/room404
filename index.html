@@ -422,7 +422,10 @@ window.submitSurvey=function(){
     document.getElementById('surveyScreen').style.opacity='0';
     setTimeout(function(){
       document.getElementById('surveyScreen').style.display='none';
-      document.getElementById('waitScreen').style.display='flex';
+      var ws=document.getElementById('waitScreen');
+      ws.style.display='flex';
+      ws.style.position='fixed';
+      ws.style.zIndex='900';
     },800);
   },1200);
 };
